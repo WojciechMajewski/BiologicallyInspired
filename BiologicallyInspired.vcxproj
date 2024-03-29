@@ -129,6 +129,27 @@
   <ItemGroup>
     <ClCompile Include="BiologicallyInspired.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ATSP\br17.atsp" />
+    <None Include="ATSP\ft53.atsp" />
+    <None Include="ATSP\ft70.atsp" />
+    <None Include="ATSP\ftv170.atsp" />
+    <None Include="ATSP\ftv33.atsp" />
+    <None Include="ATSP\ftv35.atsp" />
+    <None Include="ATSP\ftv38.atsp" />
+    <None Include="ATSP\ftv44.atsp" />
+    <None Include="ATSP\ftv47.atsp" />
+    <None Include="ATSP\ftv55.atsp" />
+    <None Include="ATSP\ftv64.atsp" />
+    <None Include="ATSP\ftv70.atsp" />
+    <None Include="ATSP\kro124p.atsp" />
+    <None Include="ATSP\p43.atsp" />
+    <None Include="ATSP\rbg323.atsp" />
+    <None Include="ATSP\rbg358.atsp" />
+    <None Include="ATSP\rbg403.atsp" />
+    <None Include="ATSP\rbg443.atsp" />
+    <None Include="ATSP\ry48p.atsp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

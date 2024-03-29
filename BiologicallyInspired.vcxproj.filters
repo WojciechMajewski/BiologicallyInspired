@@ -19,4 +19,63 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ATSP\br17.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ft53.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ft70.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv33.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv35.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv38.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv44.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv47.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv55.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv64.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv70.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ftv170.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\kro124p.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\p43.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\rbg323.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\rbg358.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\rbg403.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\rbg443.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ATSP\ry48p.atsp">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
