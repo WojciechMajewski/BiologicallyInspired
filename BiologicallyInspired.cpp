@@ -16,5 +16,9 @@ int main() {
 
     std::cout << "Random solution length: " << calculate_distance(solution, edge_matrix) << "\n";
 
+    solution = solution_search(10, "random", edge_matrix, rng);
+
+    std::cout << "Searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
+
     return 0;
 }
