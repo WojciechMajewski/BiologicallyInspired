@@ -197,6 +197,8 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
         int j_intra = 0;
         bool intra_finished = false;
 
+        int small_offset, big_offset, temp;
+
         // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an internal swap
         while (true) {
             // New node advance
@@ -233,8 +235,14 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
 
                 if (cost_improvement > 0) {
-                    std::cout << ((j_intra + 1) % solution.size()) << " " << ((i_intra + 1) % solution.size()) << "\n";
-                    std::reverse(solution.begin() + ((j_intra + 1) % solution.size()), solution.begin() + ((i_intra + 1) % solution.size()));
+                    small_offset = ((j_intra + 1) % solution.size());
+                    big_offset = ((i_intra + 1) % solution.size());
+                    if (small_offset > big_offset) {
+                        temp = big_offset;
+                        big_offset = small_offset;
+                        small_offset = temp;
+                    }
+                    std::reverse(solution.begin() + small_offset, solution.begin() + big_offset);
                     break;
                 }
 
