@@ -5,48 +5,52 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string filename = "ATSP/br17.atsp";
-    filename = "ATSP/ftv35.atsp";
+    //std::string filename = "ATSP/br17.atsp";
+    //filename = "ATSP/ftv35.atsp";
 
-    std::vector <std::vector <int>> edge_matrix = read_file(filename);
+    std::vector <std::string> files;
+    files.push_back("ATSP/br17.atsp");
+    files.push_back("ATSP/ft53.atsp");
+    files.push_back("ATSP/ft70.atsp");
+    files.push_back("ATSP/ftv33.atsp");
+    files.push_back("ATSP/ftv38.atsp");
+    files.push_back("ATSP/ftv55.atsp");
+    files.push_back("ATSP/kro124p.atsp");
 
-    int dimension = edge_matrix.size();
+    for (int i = 0; i < files.size(); i++) {
+        std::string filename = files[i];
+        std::vector <std::vector <int>> edge_matrix = read_file(filename);
+        int dimension = edge_matrix.size();
 
-    std::vector <int> solution = random_solution(dimension, rng);
+        std::string algorithm_used;
+        int time_used = 1; // seconds
 
-    std::cout << "Random solution length: " << calculate_distance(solution, edge_matrix) << "\n";
+        algorithm_used = "R";
+        for (int j = 0; j < 10; j++) {
+            std::vector <int> solution = solution_search(time_used, algorithm_used, edge_matrix, rng);
+            int distance = calculate_distance(solution, edge_matrix);
 
+            std::cout << algorithm_used << " best result after " << time_used << " seconds: " << distance << "\n";
+        }
 
+        algorithm_used = "G";
+        for (int j = 0; j < 10; j++) {
+            std::vector <int> solution = solution_search(time_used, algorithm_used, edge_matrix, rng);
+            int distance = calculate_distance(solution, edge_matrix);
 
-    solution = solution_search(5, "random", edge_matrix, rng);
+            std::cout << algorithm_used << " best result after " << time_used << " seconds: " << distance << "\n";
+        }
 
-    std::cout << "Searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
+        algorithm_used = "S";
+        for (int j = 0; j < 10; j++) {
+            std::vector <int> solution = solution_search(time_used, algorithm_used, edge_matrix, rng);
+            int distance = calculate_distance(solution, edge_matrix);
 
+            std::cout << algorithm_used << " best result after " << time_used << " seconds: " << distance << "\n";
+        }
+    }
 
-
-
-    solution = solution_search(5, "greedy", edge_matrix, rng);
-
-    std::cout << "Greedy searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
-
-
-
-
-    solution = solution_search(5, "steepest", edge_matrix, rng);
-
-    std::cout << "Steepest searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
-
-
-
-
-    solution = solution_search(25, "greedy", edge_matrix, rng);
-
-    std::cout << "Greedy searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
-
-
-    solution = solution_search(25, "steepest", edge_matrix, rng);
-
-    std::cout << "Steepest searched solution length: " << calculate_distance(solution, edge_matrix) << "\n";
+    /// Save the results
 
     return 0;
 }

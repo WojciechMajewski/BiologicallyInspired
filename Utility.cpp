@@ -280,7 +280,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
     int elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
     int stopping_time = seconds * 1000;
 
-    if (algorithm == "random") {
+    if (algorithm == "R") {
 
         while (elapsed_time < stopping_time) {
 
@@ -297,7 +297,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
     }
-    else if (algorithm == "steepest") {
+    else if (algorithm == "S") {
 
         while (elapsed_time < stopping_time) {
 
@@ -315,7 +315,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
     }
-    else if (algorithm == "greedy") {
+    else if (algorithm == "G") {
 
         while (elapsed_time < stopping_time) {
 
