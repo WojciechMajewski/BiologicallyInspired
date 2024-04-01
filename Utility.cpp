@@ -164,7 +164,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
 }
 
 
-std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::vector <int>>& edge_matrix) {
+std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng) {
     // if not steepest_neighborhood, then greedy
     // if not edges_exchange, then nodes exchange // But intra- and inter- should both be used
 
@@ -183,7 +183,8 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
         int first_to_switch_index = -1;
         int second_to_switch_index = -1;
 
-        int random_offset = rand() % solution.size(); //TODO FIX
+        int random_offset = rng() % solution.size(); //TODO FIX
+
         //int io = (i + random_offset) % solution.size(); // that's for greedy
 
         int i_old_node_iterating = 0;
@@ -319,7 +320,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
         while (elapsed_time < stopping_time) {
 
             temp_solution = random_solution(dimension, rng);
-            temp_solution = greedy_solution(temp_solution, edge_matrix);
+            temp_solution = greedy_solution(temp_solution, edge_matrix, rng);
             temp_distance = calculate_distance(temp_solution, edge_matrix);
 
             if (temp_distance < best_distance) {
