@@ -87,6 +87,20 @@ std::vector <int> random_solution(int dimension, std::default_random_engine& rng
     return solution;
 }
 
+
+std::vector <int> random_walk_one_step_solution(std::vector <int> solution, std::default_random_engine& rng) {
+
+    int a = rng() % solution.size();
+    int b = rng() % solution.size();
+    while (a == b) b = rng() % solution.size();
+    int temp = solution[a];
+    solution[a] = solution[b];
+    solution[b] = temp;
+
+
+    return solution;
+}
+
 std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std::vector <int>>& edge_matrix) {
     // if not steepest_neighborhood, then greedy
     // if not edges_exchange, then nodes exchange // But intra- and inter- should both be used
@@ -297,8 +311,25 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
     }
-    else if (algorithm == "S") {
+    else if (algorithm == "RW") {
 
+        temp_solution = random_solution(dimension, rng);
+        while (elapsed_time < stopping_time) {
+
+            temp_solution = random_walk_one_step_solution(temp_solution, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+
+
+            end = std::chrono::steady_clock::now();
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+        }
+    }
+    else if (algorithm == "S") {
         while (elapsed_time < stopping_time) {
 
             temp_solution = random_solution(dimension, rng);
