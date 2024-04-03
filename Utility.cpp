@@ -421,9 +421,5 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
         std::cout << "Unknown algorithm\n";
     }
 
-    // Greedy LS
-    // Steepest LS
-    // Nondeterministic Heuristic?
-
     return best_solution;
 }
