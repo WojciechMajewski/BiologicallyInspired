@@ -87,7 +87,6 @@ std::vector <int> random_solution(int dimension, std::default_random_engine& rng
     return solution;
 }
 
-
 std::vector <int> random_walk_one_step_solution(std::vector <int> solution, std::default_random_engine& rng) {
 
     int a = rng() % solution.size();
@@ -176,7 +175,6 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
 
     return solution;
 }
-
 
 std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng) {
     // if not steepest_neighborhood, then greedy
@@ -274,7 +272,46 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
     return solution;
 }
 
+std::vector <int> nearest_nondeterministic_solution(std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, int pool_size = 3) {
+    std::vector <int> path;
+    std::vector <bool> taken;
 
+    int starting_node = rng() % edge_matrix.size();
+
+    path.push_back(starting_node);
+
+    for (int i = 0; i < edge_matrix.size(); i++) {
+        if (i == starting_node) {
+            taken.push_back(true);
+        }
+        else {
+            taken.push_back(false);
+        }
+    }
+
+    for (int i = path.size(); i < edge_matrix.size(); i++) {
+        std::priority_queue<std::vector<int>, std::vector<std::vector<int>>, std::greater<>> choices_sorted;
+
+        for (int j = 0; j < edge_matrix.size(); j++) {
+            if (taken[j]) {
+                continue;
+            }
+            int cost_of_move = get_cost(path[path.size() - 1], j, edge_matrix);
+            std::vector <int> move{ cost_of_move, j };
+
+            choices_sorted.push(move);
+        }
+
+        int chosen_best = rng() % std::min(pool_size, int(edge_matrix.size() - path.size())); // Randomly pick one of the top n shortest edges
+
+        for (int j = 0; j < chosen_best; j++) choices_sorted.pop();
+
+        path.push_back(choices_sorted.top()[1]);
+        taken[choices_sorted.top()[1]] = true;
+    }
+
+    return path;
+}
 
 
 std::vector <int> solution_search(int seconds, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng) {
@@ -317,6 +354,22 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
         while (elapsed_time < stopping_time) {
 
             temp_solution = random_walk_one_step_solution(temp_solution, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+
+
+            end = std::chrono::steady_clock::now();
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+        }
+    }
+    else if (algorithm == "H") {
+        while (elapsed_time < stopping_time) {
+
+            temp_solution = nearest_nondeterministic_solution(edge_matrix, rng);
             temp_distance = calculate_distance(temp_solution, edge_matrix);
 
             if (temp_distance < best_distance) {

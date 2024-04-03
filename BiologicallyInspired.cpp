@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "results.txt";
+    std::string f = "new_results.txt";
 
     if (f != "") {
         std::ofstream ofs;
@@ -35,9 +35,10 @@ int main() {
         int dimension = edge_matrix.size();
 
         std::string algorithm_used;
-        int time_used = 10; // seconds
+        int time_used = 1; // seconds
 
         std::vector <std::string> configurations;
+        configurations.push_back("H");
         configurations.push_back("R");
         configurations.push_back("RW");
         configurations.push_back("G");
