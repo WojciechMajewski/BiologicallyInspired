@@ -125,15 +125,19 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
                 if (j == i || j == (i + 1) % solution.size() || (j + 1) % solution.size() == i) continue; // catch intersections
                 int old_cost = 0;
                 int cost_improvement = 0;
+                int i_next = (i + 1) % solution.size();
+                int j_next = (j + 1) % solution.size();
+                int smaller_index_edge_end = std::min(i_next, j_next);
+                int bigger_index_edge_end = std::max(i_next, j_next);
 
-                old_cost += get_cost(solution[i], solution[(i + 1) % solution.size()], edge_matrix);
-                old_cost += get_cost(solution[j], solution[(j + 1) % solution.size()], edge_matrix);
+                old_cost += get_cost(solution[i], solution[i_next], edge_matrix);
+                old_cost += get_cost(solution[j], solution[j_next], edge_matrix);
 
 
                 //cost_improvement -= get_cost(solution[i], solution[(j+1) % solution.size()], edge_matrix);
                 //cost_improvement -= get_cost(solution[j], solution[(i+1) % solution.size()], edge_matrix);
 
-                cost_improvement -= get_cost(solution[(j + 1) % solution.size()], solution[(i + 1) % solution.size()], edge_matrix);
+                cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
                 cost_improvement -= get_cost(solution[j], solution[i], edge_matrix);
 
 
@@ -152,14 +156,13 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
 
             
         if (best_improvement > 0) {
+            int i_next = (first_edge_start_index + 1) % solution.size();
+            int j_next = (second_edge_start_index + 1) % solution.size();
+            int smaller_index_edge_end = std::min(i_next, j_next);
+            int bigger_index_edge_end = std::max(i_next, j_next);
                 
-            if (((first_edge_start_index + 1) % solution.size()) > ((second_edge_start_index + 1) % solution.size())) {
-                int temp = first_edge_start_index;
-                first_edge_start_index = second_edge_start_index;
-                second_edge_start_index = temp;
-            }
             // Edge exchange through flipping a subpath
-            std::reverse(solution.begin() + ((first_edge_start_index + 1) % solution.size()), solution.begin() + ((second_edge_start_index + 1) % solution.size()));
+            std::reverse(solution.begin() + smaller_index_edge_end, solution.begin() + bigger_index_edge_end);
 
             //std::cout << "[imp " << best_improvement << " edge " << solution[first_edge_start_index] << "->" << solution[(first_edge_start_index + 1) % solution.size()];
             //std::cout << " into " << solution[second_edge_start_index] << "->" << solution[(second_edge_start_index + 1) % solution.size()];
@@ -210,8 +213,6 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
         int j_intra = 0;
         bool intra_finished = false;
 
-        int small_offset, big_offset, temp;
-
         // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an internal swap
         while (true) {
             // New node advance
@@ -232,15 +233,20 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
                 }
 
-                if (j_intra == i_intra || j_intra == (i_intra + 1) % solution.size() || (j_intra + 1) % solution.size() == i_intra) continue;
+                int i_next = (i_intra + 1) % solution.size();
+                int j_next = (j_intra + 1) % solution.size();
+                int smaller_index_edge_end = std::min(i_next, j_next);
+                int bigger_index_edge_end = std::max(i_next, j_next);
+
+                if (j_intra == i_intra || j_intra == i_next || j_next == i_intra) continue;
                 int old_cost = 0;
                 int cost_improvement = 0;
 
-                old_cost += get_cost(solution[i_intra], solution[(i_intra + 1) % solution.size()], edge_matrix);
-                old_cost += get_cost(solution[j_intra], solution[(j_intra + 1) % solution.size()], edge_matrix);
+                old_cost += get_cost(solution[i_intra], solution[i_next], edge_matrix);
+                old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
 
 
-                cost_improvement -= get_cost(solution[(j_intra + 1) % solution.size()], solution[(i_intra + 1) % solution.size()], edge_matrix);
+                cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
                 cost_improvement -= get_cost(solution[j_intra], solution[i_intra], edge_matrix);
 
 
@@ -248,14 +254,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
 
                 if (cost_improvement > 0) {
-                    small_offset = ((j_intra + 1) % solution.size());
-                    big_offset = ((i_intra + 1) % solution.size());
-                    if (small_offset > big_offset) {
-                        temp = big_offset;
-                        big_offset = small_offset;
-                        small_offset = temp;
-                    }
-                    std::reverse(solution.begin() + small_offset, solution.begin() + big_offset);
+                    std::reverse(solution.begin() + smaller_index_edge_end, solution.begin() + bigger_index_edge_end);
                     break;
                 }
 
