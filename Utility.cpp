@@ -142,8 +142,8 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
 
 
                 // Cost of two new edges
-                cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
-                cost_improvement -= get_cost(solution[j], solution[i], edge_matrix);
+                cost_improvement -= get_cost(solution[i_next], solution[j_next], edge_matrix);
+                cost_improvement -= get_cost(solution[i], solution[j], edge_matrix);
 
                 // Distances on the same side as before, but reversed
                 k = i_next;
@@ -168,6 +168,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
             int i_next = (first_edge_start_index + 1) % solution.size();
             int j_next = (second_edge_start_index + 1) % solution.size();
 
+
             if (i_next > j_next) {
 
                 std::reverse(solution.begin(), solution.end()); // Reverse whole
@@ -180,6 +181,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
             else {
                 std::reverse(solution.begin() + i_next, solution.begin() + j_next);
             }
+
                 
         }
         else { // No improvement, break the local search loop, local optimum found!
@@ -264,8 +266,8 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
 
                 // Cost of two new edges
-                cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
-                cost_improvement -= get_cost(solution[j_intra], solution[i_intra], edge_matrix);
+                cost_improvement -= get_cost(solution[i_next], solution[j_next], edge_matrix);
+                cost_improvement -= get_cost(solution[i_intra], solution[j_intra], edge_matrix);
 
                 // Distances on the same side as before, but reversed
                 k = i_next;
@@ -278,8 +280,6 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
 
                 if (cost_improvement > 0) {
-
-                    std::cout << "HERE\n";
                     if (i_next > j_next) {
 
                         std::reverse(solution.begin(), solution.end()); // Reverse whole

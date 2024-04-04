@@ -17,8 +17,8 @@ int main() {
     //filename = "ATSP/ftv35.atsp";
 
     std::vector <std::string> files;
-    files.push_back("ATSP/br17.atsp");
     files.push_back("ATSP/ft53.atsp");
+    files.push_back("ATSP/br17.atsp");
     files.push_back("ATSP/ft70.atsp");
     files.push_back("ATSP/ftv33.atsp");
     files.push_back("ATSP/ftv38.atsp");
@@ -38,8 +38,8 @@ int main() {
         int time_used = 1; // seconds
 
         std::vector <std::string> configurations;
-        configurations.push_back("G");
         configurations.push_back("S");
+        configurations.push_back("G");
         configurations.push_back("H");
         configurations.push_back("R");
         configurations.push_back("RW");
