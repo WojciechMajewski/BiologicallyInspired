@@ -745,119 +745,49 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
         long long int elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         long long int stopping_time = seconds * 1000;
 
-        if (algorithm == "R") {
-            while (elapsed_time < stopping_time) {
-                reruns++;
+
+        temp_solution = random_solution(dimension, rng);
+        while (elapsed_time < stopping_time) {
+            reruns++;
+            if (algorithm == "R") {
                 temp_solution = random_solution(dimension, rng);
                 temp_distance = calculate_distance(temp_solution, edge_matrix);
                 evaluation_count++;
-
-                //sum_distance += temp_distance;
-                distance_vector.push_back(temp_distance);
-                if (temp_distance < best_distance) {
-                    best_distance = temp_distance;
-                    best_solution = temp_solution;
-                }
-                if (temp_distance > worst_distance) {
-                    worst_distance = temp_distance;
-                }
-                end = std::chrono::steady_clock::now();
-                elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
             }
-        }
-        else if (algorithm == "RW") {
-            temp_solution = random_solution(dimension, rng);
-            while (elapsed_time < stopping_time) {
-                reruns++;
-
+            else if (algorithm == "RW") {
                 temp_solution = random_walk_one_step_solution(temp_solution, rng);
                 temp_distance = calculate_distance(temp_solution, edge_matrix);
                 evaluation_count++;
-
-                //sum_distance += temp_distance;
-                distance_vector.push_back(temp_distance);
-                if (temp_distance < best_distance) {
-                    best_distance = temp_distance;
-                    best_solution = temp_solution;
-                }
-                if (temp_distance > worst_distance) {
-                    worst_distance = temp_distance;
-                }
-
-                end = std::chrono::steady_clock::now();
-                elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
             }
-        }
-        else if (algorithm == "H") {
-            while (elapsed_time < stopping_time) {
-                reruns++;
-
+            else if (algorithm == "H") {
                 temp_solution = nearest_nondeterministic_solution(edge_matrix, rng);
                 temp_distance = calculate_distance(temp_solution, edge_matrix);
-
-                //sum_distance += temp_distance;
-                distance_vector.push_back(temp_distance);
-                if (temp_distance < best_distance) {
-                    best_distance = temp_distance;
-                    best_solution = temp_solution;
-                }
-                if (temp_distance > worst_distance) {
-                    worst_distance = temp_distance;
-                }
-
-
-                end = std::chrono::steady_clock::now();
-                elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
             }
-        }
-        else if (algorithm == "S") {
-            while (elapsed_time < stopping_time) {
-                reruns++;
-
+            else if (algorithm == "S") {
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = steepest_solution(temp_solution, edge_matrix, step_count, evaluation_count);
                 temp_distance = calculate_distance(temp_solution, edge_matrix);
-
-                //sum_distance += temp_distance;
-                distance_vector.push_back(temp_distance);
-                if (temp_distance < best_distance) {
-                    best_distance = temp_distance;
-                    best_solution = temp_solution;
-                }
-                if (temp_distance > worst_distance) {
-                    worst_distance = temp_distance;
-                }
-
-                end = std::chrono::steady_clock::now();
-                elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
             }
-
-        }
-        else if (algorithm == "G") {
-
-            while (elapsed_time < stopping_time) {
-                reruns++;
-
+            else if (algorithm == "G") {
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = greedy_solution(temp_solution, edge_matrix, rng, step_count, evaluation_count);
                 temp_distance = calculate_distance(temp_solution, edge_matrix);
-
-                //sum_distance += temp_distance;
-                distance_vector.push_back(temp_distance);
-                if (temp_distance < best_distance) {
-                    best_distance = temp_distance;
-                    best_solution = temp_solution;
-                }
-                if (temp_distance > worst_distance) {
-                    worst_distance = temp_distance;
-                }
-
-                end = std::chrono::steady_clock::now();
-                elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
             }
-        }
-        else {
-            std::cout << "Unknown algorithm\n";
+            else {
+                std::cout << "Unknown algorithm\n";
+            }
+
+            distance_vector.push_back(temp_distance);
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+            if (temp_distance > worst_distance) {
+                worst_distance = temp_distance;
+            }
+            end = std::chrono::steady_clock::now();
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+
         }
 
         std::cout << "restart" << t << "\n";
@@ -890,8 +820,8 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
         std::cout << "avg_steps: " << step_count / reruns << "\n";
     }
     if (evaluation_count > 0) {
-        ofs << "avg_evaluations: " << evaluation_count / reruns << "\n";
-        std::cout << "avg_evaluations: " << evaluation_count / reruns << "\n";
+        ofs << "avg_evaluations: " << evaluation_count / restarts << "\n";
+        std::cout << "avg_evaluations: " << evaluation_count / restarts << "\n";
     }
 
 

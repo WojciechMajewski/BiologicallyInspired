@@ -1,1 +1,2 @@
 C:\Users\wojci\source\repos\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe

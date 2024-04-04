@@ -1,76 +1,54 @@
-﻿  Utility.cpp
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(72,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(82,28): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(82,28): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(82,28): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(82,28): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(82,28): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(97,19): warning C4244: '=': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(97,19): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(97,19): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(97,19): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(97,19): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(122,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(123,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(232,29): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(235,38): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(317,20): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(317,20): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(317,20): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(317,20): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(317,20): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(319,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(328,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(331,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(335,74): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244: 'argument': conversion from 'const _Ty' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:             _Ty=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         and
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(345,46): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(355,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(467,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(520,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(542,49): warning C4244: '=': conversion from '__int64' to 'float', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(569,49): warning C4244: '=': conversion from '__int64' to 'float', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(594,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(609,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(631,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(652,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(674,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(696,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(717,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(747,43): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(747,43): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(747,43): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(747,43): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(747,43): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(768,43): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(768,43): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(768,43): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(768,43): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(768,43): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(789,43): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(789,43): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(789,43): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(789,43): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(789,43): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(812,43): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(812,43): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(812,43): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(812,43): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(812,43): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(836,43): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(836,43): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(836,43): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(836,43): warning C4244:             _Ty=int
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(836,43): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(860,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(866,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(872,22): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(895,33): warning C4018: '<': signed/unsigned mismatch
-  BiologicallyInspired.vcxproj -> C:\Users\wojci\source\repos\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
+﻿  BiologicallyInspired.cpp
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\BiologicallyInspired.cpp(43,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Utility.cpp
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(70,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(80,28): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(95,19): warning C4244: '=': conversion from '__int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(120,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(121,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(232,29): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(235,38): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(318,20): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(320,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(329,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(332,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(336,74): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(346,46): warning C4244: 'argument': conversion from 'const _Ty' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+          and
+          [
+              _Ty=int
+          ]
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(356,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(469,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(523,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(546,49): warning C4244: '=': conversion from '__int64' to 'float', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(573,49): warning C4244: '=': conversion from '__int64' to 'float', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(598,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(614,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(636,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(657,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(679,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(701,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(722,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(800,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(806,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(812,31): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(838,33): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  BiologicallyInspired.vcxproj -> C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
