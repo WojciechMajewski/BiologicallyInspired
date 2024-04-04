@@ -174,7 +174,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
                 i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
                 j_next = solution.size() - j_next;
 
-                std::reverse(solution.begin() + j_next, solution.begin() + i_next); // Flip using new indexes
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
 
             }
             else {
@@ -226,7 +226,6 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
         // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an internal swap
         while (true) {
             // New node advance
-
             if (!intra_finished) {
                 j_intra++;
                 if (j_intra >= solution.size()) {
@@ -280,13 +279,14 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
                 if (cost_improvement > 0) {
 
+                    std::cout << "HERE\n";
                     if (i_next > j_next) {
 
                         std::reverse(solution.begin(), solution.end()); // Reverse whole
                         i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
                         j_next = solution.size() - j_next;
 
-                        std::reverse(solution.begin() + j_next, solution.begin() + i_next); // Flip using new indexes
+                        std::reverse(solution.begin() + i_next, solution.begin() + j_next);
 
                     }
                     else {

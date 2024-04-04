@@ -1,48 +1,38 @@
-﻿  BiologicallyInspired.cpp
-C:\Users\wojci\source\repos\BiologicallyInspired\BiologicallyInspired.cpp(35,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Utility.cpp
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(149,21): error C2374: 'k': redefinition; multiple initialization
-  C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(137,21):
-  see declaration of 'k'
-  
+﻿  Utility.cpp
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(174,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(175,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(271,21): error C2374: 'k': redefinition; multiple initialization
-  C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(259,21):
-  see declaration of 'k'
-  
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(285,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(286,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(328,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(355,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(367,22): warning C4244: 'initializing': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(367,22): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(367,22): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(367,22): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(367,22): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(384,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(384,100): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(384,100): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(384,100): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(384,100): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(402,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(402,100): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(402,100): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(402,100): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(402,100): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(418,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(418,100): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(418,100): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(418,100): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(418,100): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(435,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(435,100): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(435,100): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(435,100): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(435,100): warning C4244:         ]
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(453,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(453,100): warning C4244:         with
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(453,100): warning C4244:         [
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(453,100): warning C4244:             _Rep=__int64
-C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(453,100): warning C4244:         ]
-  Generating Code...
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(287,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(329,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(356,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(368,22): warning C4244: 'initializing': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(368,22): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(368,22): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(368,22): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(368,22): warning C4244:         ]
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(385,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(385,100): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(385,100): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(385,100): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(385,100): warning C4244:         ]
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(403,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(403,100): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(403,100): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(403,100): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(403,100): warning C4244:         ]
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(419,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(419,100): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(419,100): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(419,100): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(419,100): warning C4244:         ]
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(436,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(436,100): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(436,100): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(436,100): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(436,100): warning C4244:         ]
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(454,100): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(454,100): warning C4244:         with
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(454,100): warning C4244:         [
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(454,100): warning C4244:             _Rep=__int64
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(454,100): warning C4244:         ]
+  BiologicallyInspired.vcxproj -> C:\Users\wojci\source\repos\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe

@@ -38,11 +38,11 @@ int main() {
         int time_used = 1; // seconds
 
         std::vector <std::string> configurations;
+        configurations.push_back("G");
+        configurations.push_back("S");
         configurations.push_back("H");
         configurations.push_back("R");
         configurations.push_back("RW");
-        configurations.push_back("G");
-        configurations.push_back("S");
 
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
