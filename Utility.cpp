@@ -109,8 +109,6 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
     // 100 iterations instead of while(true)
     for (int t = 0; t < 1000; t++) {
         int best_improvement = 0;
-        int new_node_index = -1;
-        int replacing_node_index = -1;
 
         int first_edge_start_index = -1; // By definition the end node will be (i+1 mod size)
         int second_edge_start_index = -1;
@@ -121,35 +119,46 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
         // Then edge/node reordering
         // Two pairs of consecutive nodes
         for (int i = 0; i < solution.size(); i++) {
-            for (int j = 0; (j + 1) % solution.size() < i; j++) {
-                if (j == i || j == (i + 1) % solution.size() || (j + 1) % solution.size() == i) continue; // catch intersections
-                int old_cost = 0;
-                int cost_improvement = 0;
+            for (int j = 0; j < solution.size(); j++) {
                 int i_next = (i + 1) % solution.size();
                 int j_next = (j + 1) % solution.size();
-                int smaller_index_edge_end = std::min(i_next, j_next);
-                int bigger_index_edge_end = std::max(i_next, j_next);
 
-                old_cost += get_cost(solution[i], solution[i_next], edge_matrix);
+                if (j == i || j == i_next || j_next == i) continue; // catch intersections
+                int old_cost = 0;
+                int cost_improvement = 0;
+
+
+
+                // Current edges to change
+                old_cost += get_cost(solution[i], solution[i_next], edge_matrix); 
                 old_cost += get_cost(solution[j], solution[j_next], edge_matrix);
 
+                // All of the distances on one side, from i to j
+                int k = i_next;
+                while (k != j) {
+                    old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
+                    k = (k + 1) % solution.size();
+                }
 
-                //cost_improvement -= get_cost(solution[i], solution[(j+1) % solution.size()], edge_matrix);
-                //cost_improvement -= get_cost(solution[j], solution[(i+1) % solution.size()], edge_matrix);
 
+                // Cost of two new edges
                 cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
                 cost_improvement -= get_cost(solution[j], solution[i], edge_matrix);
 
+                // Distances on the same side as before, but reversed
+                int k = i_next;
+                while (k != j) {
+                    cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
+                    k = (k + 1) % solution.size();
+                }
 
                 cost_improvement += old_cost;
 
                 if (cost_improvement > best_improvement) {
                     best_improvement = cost_improvement;
 
-                    first_edge_start_index = j;
-                    second_edge_start_index = i; // As j is always smaller than i
-
-                    new_node_index = -1;
+                    first_edge_start_index = i;
+                    second_edge_start_index = j;
                 }
             }
         }
@@ -158,16 +167,19 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
         if (best_improvement > 0) {
             int i_next = (first_edge_start_index + 1) % solution.size();
             int j_next = (second_edge_start_index + 1) % solution.size();
-            int smaller_index_edge_end = std::min(i_next, j_next);
-            int bigger_index_edge_end = std::max(i_next, j_next);
-                
-            // Edge exchange through flipping a subpath
-            std::reverse(solution.begin() + smaller_index_edge_end, solution.begin() + bigger_index_edge_end);
 
-            //std::cout << "[imp " << best_improvement << " edge " << solution[first_edge_start_index] << "->" << solution[(first_edge_start_index + 1) % solution.size()];
-            //std::cout << " into " << solution[second_edge_start_index] << "->" << solution[(second_edge_start_index + 1) % solution.size()];
-            //std::cout << " in " << first_edge_start_index << " and " << second_edge_start_index << "], ";
-                    
+            if (i_next > j_next) {
+
+                std::reverse(solution.begin(), solution.end()); // Reverse whole
+                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = solution.size() - j_next;
+
+                std::reverse(solution.begin() + j_next, solution.begin() + i_next); // Flip using new indexes
+
+            }
+            else {
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+            }
                 
         }
         else { // No improvement, break the local search loop, local optimum found!

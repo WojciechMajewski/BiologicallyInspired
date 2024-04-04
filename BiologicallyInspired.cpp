@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "results_temp.txt";
+    std::string f = "results_new_method.txt";
 
     if (f != "") {
         std::ofstream ofs;
