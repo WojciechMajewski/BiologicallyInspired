@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "quality_similarity.txt";
+    std::string f = "in_depth_results.txt";
 
 
     if (f != "") {
@@ -14,18 +14,15 @@ int main() {
         ofs.close();
     }
 
-    //std::string filename = "ATSP/br17.atsp";
-    //filename = "ATSP/ftv35.atsp";
-
     std::vector <std::string> files;
-    //files.push_back("ATSP/br17.atsp");
-    //files.push_back("ATSP/ftv33.atsp");
-    //files.push_back("ATSP/ftv38.atsp");
-    //files.push_back("ATSP/ft53.atsp");
-    //files.push_back("ATSP/ftv55.atsp");
-    //files.push_back("ATSP/ft70.atsp");
-    //files.push_back("ATSP/kro124p.atsp");
-    //files.push_back("ATSP/rbg323.atsp");
+    files.push_back("ATSP/br17.atsp");
+    files.push_back("ATSP/ftv33.atsp");
+    files.push_back("ATSP/ftv38.atsp");
+    files.push_back("ATSP/ft53.atsp");
+    files.push_back("ATSP/ftv55.atsp");
+    files.push_back("ATSP/ft70.atsp");
+    files.push_back("ATSP/kro124p.atsp");
+    files.push_back("ATSP/ry48p.atsp");
 
     // [Initial final quality] or [quality by restarts]
     //files.push_back("ATSP/ftv33.atsp");
@@ -34,8 +31,8 @@ int main() {
     //files.push_back("ATSP/ftv55.atsp");
 
     // [Quality similarity]
-    files.push_back("ATSP/ftv38.atsp");
-    files.push_back("ATSP/ft53.atsp");
+    //files.push_back("ATSP/ftv38.atsp");
+    //files.push_back("ATSP/ft53.atsp");
 
     std::ofstream ofs;
     ofs.open(f, std::ios_base::app);
@@ -46,60 +43,82 @@ int main() {
         int dimension = edge_matrix.size();
 
         std::string algorithm_used;
-        int time_used = 10; // seconds
+        int time_used = 1; // seconds
 
-        //std::vector <std::string> configurations;
-        //configurations.push_back("R");
-        //configurations.push_back("RW");
-        //configurations.push_back("H");
-        //configurations.push_back("G");
-        //configurations.push_back("S");
-        //
-        //ofs << "Problem " << filename << ":\n";
-        //std::cout << "Problem " << filename << ":\n";
-        //
-        //for (int c = 0; c < configurations.size(); c++) {
-        //
-        //    algorithm_used = configurations[c];
-        //
-        //    ofs << algorithm_used << " runs for " << time_used << " seconds:\n";
-        //    std::cout << algorithm_used << " runs for " << time_used << " seconds:\n";
-        //
-        //
-        //    for (int j = 0; j < 10; j++) {
-        //        std::vector <int> solution = solution_search(time_used, algorithm_used, edge_matrix, rng);
-        //        int distance = calculate_distance(solution, edge_matrix);
-        //
-        //        ofs << distance << "\n";
-        //        std::cout << distance << "\n";
-        //    }
-        //
-        //    ofs << "\n";
-        //    std::cout << "\n";
-        //}
+        std::vector <std::string> configurations;
+        configurations.push_back("R");
+        configurations.push_back("RW");
+        configurations.push_back("H");
+        configurations.push_back("G");
+        configurations.push_back("S");
+        /*
+        ofs << "Problem " << filename << ":\n";
+        std::cout << "Problem " << filename << ":\n";
+        
+        for (int c = 0; c < configurations.size(); c++) {
+        
+            algorithm_used = configurations[c];
+        
+            ofs << algorithm_used << " runs for " << time_used << " seconds:\n";
+            std::cout << algorithm_used << " runs for " << time_used << " seconds:\n";
+        
+        
+            for (int j = 0; j < 10; j++) {
+                std::vector <int> solution = solution_search(time_used, algorithm_used, edge_matrix, rng);
+                int distance = calculate_distance(solution, edge_matrix);
+        
+                ofs << distance << "\n";
+                std::cout << distance << "\n";
+            }
+        
+            ofs << "\n";
+            std::cout << "\n";
+        }
+        */
+
+        /// In-depth
+        ofs << "Problem " << filename << ":\n";
+        std::cout << "Problem " << filename << ":\n";
+
+        for (int c = 0; c < configurations.size(); c++) {
+
+            algorithm_used = configurations[c];
+
+            ofs << algorithm_used << " runs for " << time_used << " seconds:\n";
+            std::cout << algorithm_used << " runs for " << time_used << " seconds:\n";
+
+            int restarts = 10;
+
+            in_depth_solution_search(time_used, restarts, algorithm_used, edge_matrix, rng, ofs);
+            
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
 
 
 
-
-        ///// Initial and final quality ///
-        //std::vector <std::string> configurations;
-        //configurations.push_back("G");
-        //configurations.push_back("S");
-        //int runs = 50;
-        //
-        //ofs << "Problem " << filename << ":\n";
-        //std::cout << "Problem " << filename << ":\n";
-        //for (int c = 0; c < configurations.size(); c++) {
-        //
-        //    algorithm_used = configurations[c];
-        //
-        //
-        //    ofs << algorithm_used << " runs for " << runs << " runs:\n";
-        //    std::cout << algorithm_used << " runs for " << runs << " runs:\n";
-        //
-        //    solution_search_reruns(runs, algorithm_used, edge_matrix, rng, ofs);
-        //    
-        //}
+        /*
+        /// Initial and final quality ///
+        std::vector <std::string> configurations;
+        configurations.push_back("G");
+        configurations.push_back("S");
+        int runs = 50;
+        
+        ofs << "Problem " << filename << ":\n";
+        std::cout << "Problem " << filename << ":\n";
+        for (int c = 0; c < configurations.size(); c++) {
+        
+            algorithm_used = configurations[c];
+        
+        
+            ofs << algorithm_used << " runs for " << runs << " runs:\n";
+            std::cout << algorithm_used << " runs for " << runs << " runs:\n";
+        
+            solution_search_reruns(runs, algorithm_used, edge_matrix, rng, ofs);
+            
+        }
+        */
 
         /*
         /// Quality by restarts ///
@@ -123,6 +142,7 @@ int main() {
         }
         */
 
+        /*
         /// Quality by similarity ///
         std::vector <std::string> configurations;
         configurations.push_back("R");
@@ -144,6 +164,7 @@ int main() {
             solution_search_reruns_by_similarity(runs, algorithm_used, edge_matrix, rng, ofs);
 
         }
+        */
     }
 
 
