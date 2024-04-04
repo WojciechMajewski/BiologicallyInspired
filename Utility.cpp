@@ -584,3 +584,124 @@ void solution_search_reruns_by_restarts(int reruns, std::string algorithm, std::
         std::cout << "Unknown algorithm\n";
     }
 }
+
+
+void solution_search_reruns_by_similarity(int reruns, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng, std::ofstream& ofs) {
+
+    int dimension = edge_matrix.size();
+
+    std::vector <int> temp_solution;
+    int temp_distance;
+
+    if (algorithm == "R") {
+        for (int k = 1; k < reruns + 1; k++) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+            for (int j = 0; j < temp_solution.size(); j++) {
+
+                ofs << temp_solution[j] << " ";
+                std::cout << temp_solution[j] << " ";
+            }
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "RW") {
+        temp_solution = random_solution(dimension, rng);
+
+        for (int k = 1; k < reruns + 1; k++) {
+            temp_solution = random_walk_one_step_solution(temp_solution, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+            for (int j = 0; j < temp_solution.size(); j++) {
+
+                ofs << temp_solution[j] << " ";
+                std::cout << temp_solution[j] << " ";
+            }
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "H") {
+        for (int k = 1; k < reruns + 1; k++) {
+
+            temp_solution = nearest_nondeterministic_solution(edge_matrix, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+            for (int j = 0; j < temp_solution.size(); j++) {
+
+                ofs << temp_solution[j] << " ";
+                std::cout << temp_solution[j] << " ";
+            }
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "S") {
+        for (int k = 1; k < reruns + 1; k++) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_solution = steepest_solution(temp_solution, edge_matrix);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+            for (int j = 0; j < temp_solution.size(); j++) {
+
+                ofs << temp_solution[j] << " ";
+                std::cout << temp_solution[j] << " ";
+            }
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "G") {
+        for (int k = 1; k < reruns + 1; k++) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_solution = greedy_solution(temp_solution, edge_matrix, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+            for (int j = 0; j < temp_solution.size(); j++) {
+
+                ofs << temp_solution[j] << " ";
+                std::cout << temp_solution[j] << " ";
+            }
+
+            ofs << "\n";
+            std::cout << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else {
+        std::cout << "Unknown algorithm\n";
+    }
+}
