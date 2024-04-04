@@ -229,7 +229,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
             if (!intra_finished) {
                 j_intra++;
-                if (j_intra + 1 >= i_intra) {
+                if (j_intra >= solution.size()) {
                     j_intra = 0;
                     i_intra_iter++;
                     if (i_intra_iter >= solution.size()) {
