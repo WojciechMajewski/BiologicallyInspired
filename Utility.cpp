@@ -726,14 +726,13 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
     long long int worst_distance = 0;
     long long int sum_distance = 0;
     std::vector <long long int> distance_vector;
-    std::vector <long long int> times_vector;
+    std::vector <long long int> time_vector;
     std::vector <long long int> steps_vector;
     std::vector <long long int> evaluations_vector;
 
     std::vector <int> temp_solution;
     long long int temp_distance = 1000000;
 
-    long long int step_count = 0;
     long long int evaluation_count = 0;
 
     long long int reruns = 0;
@@ -741,43 +740,50 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
 
     for (long long int t = 0; t < restarts; t++) {
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        std::chrono::steady_clock::time_point rerun_begin = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         long long int elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+        long long int single_rerun_time;
         long long int stopping_time = seconds * 1000;
 
 
         temp_solution = random_solution(dimension, rng);
         while (elapsed_time < stopping_time) {
+
+            rerun_begin = std::chrono::steady_clock::now();
+
             reruns++;
             if (algorithm == "R") {
                 temp_solution = random_solution(dimension, rng);
-                temp_distance = calculate_distance(temp_solution, edge_matrix);
                 evaluation_count++;
             }
             else if (algorithm == "RW") {
                 temp_solution = random_walk_one_step_solution(temp_solution, rng);
-                temp_distance = calculate_distance(temp_solution, edge_matrix);
                 evaluation_count++;
             }
             else if (algorithm == "H") {
                 temp_solution = nearest_nondeterministic_solution(edge_matrix, rng);
-                temp_distance = calculate_distance(temp_solution, edge_matrix);
             }
             else if (algorithm == "S") {
+                long long int step_count = 0;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = steepest_solution(temp_solution, edge_matrix, step_count, evaluation_count);
-                temp_distance = calculate_distance(temp_solution, edge_matrix);
+                steps_vector.push_back(step_count);
             }
             else if (algorithm == "G") {
+                long long int step_count = 0;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = greedy_solution(temp_solution, edge_matrix, rng, step_count, evaluation_count);
-                temp_distance = calculate_distance(temp_solution, edge_matrix);
+                steps_vector.push_back(step_count);
             }
             else {
                 std::cout << "Unknown algorithm\n";
             }
 
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
             distance_vector.push_back(temp_distance);
+
             if (temp_distance < best_distance) {
                 best_distance = temp_distance;
                 best_solution = temp_solution;
@@ -785,39 +791,61 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
             if (temp_distance > worst_distance) {
                 worst_distance = temp_distance;
             }
-            end = std::chrono::steady_clock::now();
-            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
 
+            end = std::chrono::steady_clock::now();
+
+            single_rerun_time = std::chrono::duration_cast<std::chrono::microseconds>(end - rerun_begin).count();
+            time_vector.push_back(single_rerun_time);
+
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
 
         std::cout << "restart" << t << "\n";
     }
-    std::chrono::steady_clock::time_point run_end = std::chrono::steady_clock::now();
-    long long int elapsed_time = std::chrono::duration_cast<std::chrono::nanoseconds>(run_end - run_begin).count();
-    long long int avg_time = elapsed_time / reruns;
 
+    /// Counting averages
     long long int avg_distance = 0;
-    for (long long int j = 0; j < distance_vector.size(); j++) {
-        avg_distance += distance_vector[j];
-    }
+    long long int avg_time = 0;
+    long long int avg_evaluations = 0;
+    for (long long int j = 0; j < distance_vector.size(); j++) avg_distance += distance_vector[j];
+    for (long long int j = 0; j < time_vector.size(); j++) avg_time += time_vector[j];
+
     avg_distance = avg_distance / distance_vector.size();
+    avg_time = avg_time / time_vector.size();
 
-    long long int variance = 0;
-    for (long long int j = 0; j < distance_vector.size(); j++) {
-        long long int deviation = avg_distance - distance_vector[j];
-        variance += deviation * deviation;
-    }
-    variance = variance / distance_vector.size();
 
-    long long int sd_distance = std::sqrt(variance);
+    /// Counting variance
+    long long int distance_variance = 0;
+    long long int time_variance = 0;
+    for (long long int j = 0; j < distance_vector.size(); j++) distance_variance += (avg_distance - distance_vector[j]) * (avg_distance - distance_vector[j]);
+    for (long long int j = 0; j < time_vector.size(); j++) time_variance += (avg_time - time_vector[j]) * (avg_time - time_vector[j]);
 
-    //long long int avg_distance = sum_distance / reruns;
+    distance_variance = distance_variance / distance_vector.size();
+    time_variance = time_variance / time_vector.size();
+
+    long long int sd_distance = std::sqrt(distance_variance);
+    long long int sd_time = std::sqrt(time_variance);
+
+    //avg_time /= 1000;
+    //sd_time /= 1000;
 
     std::cout << "reruns " << reruns << "\n";
 
-    if (step_count > 0) {
-        ofs << "avg_steps: " << step_count / reruns << "\n";
-        std::cout << "avg_steps: " << step_count / reruns << "\n";
+    if (steps_vector.size() > 0) {
+        long long int avg_steps = 0;
+        for (long long int j = 0; j < steps_vector.size(); j++) avg_steps += steps_vector[j];
+        avg_steps = avg_steps / steps_vector.size();
+        long long int steps_variance = 0;
+        for (long long int j = 0; j < steps_vector.size(); j++) steps_variance += (avg_steps - steps_vector[j]) * (avg_steps - steps_vector[j]);
+        steps_variance = steps_variance / steps_vector.size();
+        long long int sd_steps = std::sqrt(steps_variance);
+
+
+        ofs << "avg_steps: " << avg_steps << " ";
+        std::cout << "avg_steps: " << avg_steps << " ";
+
+        ofs << "sd: " << sd_steps << "\n";
+        std::cout << "sd: " << sd_steps << "\n";
     }
     if (evaluation_count > 0) {
         ofs << "avg_evaluations: " << evaluation_count / restarts << "\n";
@@ -825,16 +853,18 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
     }
 
 
-    ofs << best_distance << " "; //best
+    ofs << best_distance << " ";    //best
     std::cout << best_distance << " ";
-    ofs << avg_distance << " "; //avg
+    ofs << avg_distance << " ";     //avg distance
     std::cout << avg_distance << " ";
-    ofs << sd_distance << " "; //standard deviation
+    ofs << sd_distance << " ";      //sd distance
     std::cout << sd_distance << " ";
-    ofs << worst_distance << " "; //worst
+    ofs << worst_distance << " ";   //worst
     std::cout << worst_distance << " ";
-    ofs << avg_time << "ns ";
-    std::cout << avg_time << "ns ";
+    ofs << avg_time << "mics ";       //avg time
+    std::cout << avg_time << "mics ";
+    ofs << sd_time << "mics ";      //sd time
+    std::cout << sd_time << "mics ";
     for (long long int j = 0; j < temp_solution.size(); j++) {
         ofs << best_solution[j] << " ";
         std::cout << best_solution[j] << " ";

@@ -1,6 +1,4 @@
-﻿  BiologicallyInspired.cpp
-C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\BiologicallyInspired.cpp(43,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Utility.cpp
+﻿  Utility.cpp
 C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(70,33): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(80,28): warning C4244: 'argument': conversion from '__int64' to '_Ty', possible loss of data
           with
@@ -46,9 +44,14 @@ C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(657,41): war
 C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(679,41): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(701,41): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(722,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(800,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(806,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(812,31): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
-C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(838,33): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(810,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(811,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(820,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(821,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(826,31): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(827,27): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(836,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(839,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(841,32): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\Utility.cpp(868,33): warning C4018: '<': signed/unsigned mismatch
   BiologicallyInspired.vcxproj -> C:\Users\Wojciech\Documents\GitHub\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
