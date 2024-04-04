@@ -435,6 +435,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             end = std::chrono::steady_clock::now();
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
+        
     }
     else if (algorithm == "G") {
 
@@ -459,4 +460,55 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
     }
 
     return best_solution;
+}
+
+
+void solution_search_reruns(int reruns, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng, std::ofstream& ofs) {
+
+    int dimension = edge_matrix.size();
+
+    std::vector <int> temp_solution;
+    int temp_distance = 1000000;
+
+    if (algorithm == "S") {
+        for (int k = 0; k < reruns; k++) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+
+            temp_solution = steepest_solution(temp_solution, edge_matrix);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << "\n";
+            std::cout << temp_distance << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "G") {
+        for (int k = 0; k < reruns; k++) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << " ";
+            std::cout << temp_distance << " ";
+
+            temp_solution = greedy_solution(temp_solution, edge_matrix, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            ofs << temp_distance << "\n";
+            std::cout << temp_distance << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else {
+        std::cout << "Unknown algorithm\n";
+    }
 }
