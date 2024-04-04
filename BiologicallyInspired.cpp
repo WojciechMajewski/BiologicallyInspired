@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "in_depth_results.txt";
+    std::string f = "in_depth_results_10s.txt";
 
 
     if (f != "") {
@@ -43,7 +43,7 @@ int main() {
         int dimension = edge_matrix.size();
 
         std::string algorithm_used;
-        int time_used = 1; // seconds
+        int time_used = 10; // seconds
 
         std::vector <std::string> configurations;
         configurations.push_back("R");
