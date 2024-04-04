@@ -512,3 +512,75 @@ void solution_search_reruns(int reruns, std::string algorithm, std::vector <std:
         std::cout << "Unknown algorithm\n";
     }
 }
+
+
+void solution_search_reruns_by_restarts(int reruns, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng, std::ofstream& ofs) {
+
+    int dimension = edge_matrix.size();
+
+    std::vector <int> best_solution;
+    int best_distance = 1000000;
+    int sum_distance = 0;
+    float current_avg_distance;
+
+    std::vector <int> temp_solution;
+    int temp_distance;
+
+    if (algorithm == "S") {
+        for (int k = 1; k < reruns + 1; k++) {
+            ofs << k << " ";
+            std::cout << k << " ";
+
+            temp_solution = random_solution(dimension, rng);
+            temp_solution = steepest_solution(temp_solution, edge_matrix);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            sum_distance += temp_distance;
+            current_avg_distance = sum_distance / k;
+
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+
+            ofs << current_avg_distance << " ";
+            std::cout << current_avg_distance << " ";
+
+            ofs << best_distance << "\n";
+            std::cout << best_distance << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else if (algorithm == "G") {
+        for (int k = 1; k < reruns + 1; k++) {
+            ofs << k << " ";
+            std::cout << k << " ";
+
+            temp_solution = random_solution(dimension, rng);
+            temp_solution = greedy_solution(temp_solution, edge_matrix, rng);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            sum_distance += temp_distance;
+            current_avg_distance = sum_distance / k;
+
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+
+            ofs << current_avg_distance << " ";
+            std::cout << current_avg_distance << " ";
+
+            ofs << best_distance << "\n";
+            std::cout << best_distance << "\n";
+        }
+
+        ofs << "\n";
+        std::cout << "\n";
+    }
+    else {
+        std::cout << "Unknown algorithm\n";
+    }
+}

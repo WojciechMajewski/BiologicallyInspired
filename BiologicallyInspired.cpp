@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "initial_final_quality.txt";
+    std::string f = "quality_by_restarts.txt";
 
 
     if (f != "") {
@@ -27,7 +27,7 @@ int main() {
     //files.push_back("ATSP/kro124p.atsp");
     //files.push_back("ATSP/rbg323.atsp");
 
-    // Initial final quality
+    // [Initial final quality] or [quality by restarts]
     files.push_back("ATSP/ftv33.atsp");
     files.push_back("ATSP/ftv38.atsp");
     files.push_back("ATSP/ft53.atsp");
@@ -78,11 +78,31 @@ int main() {
 
 
 
-        /// Initial and final quality ///
+        ///// Initial and final quality ///
+        //std::vector <std::string> configurations;
+        //configurations.push_back("G");
+        //configurations.push_back("S");
+        //int runs = 50;
+        //
+        //ofs << "Problem " << filename << ":\n";
+        //std::cout << "Problem " << filename << ":\n";
+        //for (int c = 0; c < configurations.size(); c++) {
+        //
+        //    algorithm_used = configurations[c];
+        //
+        //
+        //    ofs << algorithm_used << " runs for " << runs << " runs:\n";
+        //    std::cout << algorithm_used << " runs for " << runs << " runs:\n";
+        //
+        //    solution_search_reruns(runs, algorithm_used, edge_matrix, rng, ofs);
+        //    
+        //}
+
+        /// Quality by restarts ///
         std::vector <std::string> configurations;
         configurations.push_back("G");
         configurations.push_back("S");
-        int runs = 50;
+        int runs = 300;
 
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
@@ -94,10 +114,9 @@ int main() {
             ofs << algorithm_used << " runs for " << runs << " runs:\n";
             std::cout << algorithm_used << " runs for " << runs << " runs:\n";
 
-            solution_search_reruns(runs, algorithm_used, edge_matrix, rng, ofs);
-            
-        }
+            solution_search_reruns_by_restarts(runs, algorithm_used, edge_matrix, rng, ofs);
 
+        }
     }
 
 

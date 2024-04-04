@@ -36,4 +36,7 @@ C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(455,100): warning C
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(455,100): warning C4244:             _Rep=__int64
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(455,100): warning C4244:         ]
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(468,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(519,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(539,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(566,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   BiologicallyInspired.vcxproj -> C:\Users\wojci\source\repos\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
