@@ -733,7 +733,6 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
     std::vector <int> temp_solution;
     long long int temp_distance = 1000000;
 
-    long long int evaluation_count = 0;
 
     long long int reruns = 0;
     std::chrono::steady_clock::time_point run_begin = std::chrono::steady_clock::now();
@@ -746,6 +745,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
         long long int single_rerun_time;
         long long int stopping_time = seconds * 1000;
 
+        long long int evaluation_count = 0;
 
         temp_solution = random_solution(dimension, rng);
         while (elapsed_time < stopping_time) {
@@ -800,6 +800,8 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
 
+        evaluations_vector.push_back(evaluation_count);
+
         std::cout << "restart" << t << "\n";
     }
 
@@ -847,9 +849,21 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
         ofs << "sd: " << sd_steps << "\n";
         std::cout << "sd: " << sd_steps << "\n";
     }
-    if (evaluation_count > 0) {
-        ofs << "avg_evaluations: " << evaluation_count / restarts << "\n";
-        std::cout << "avg_evaluations: " << evaluation_count / restarts << "\n";
+    if (evaluations_vector.size() > 0) {
+        long long int avg_evals = 0;
+        for (long long int j = 0; j < evaluations_vector.size(); j++) avg_evals += evaluations_vector[j];
+        avg_evals = avg_evals / evaluations_vector.size();
+        long long int evals_variance = 0;
+        for (long long int j = 0; j < evaluations_vector.size(); j++) evals_variance += (avg_evals - evaluations_vector[j]) * (avg_evals - evaluations_vector[j]);
+        evals_variance = evals_variance / evaluations_vector.size();
+        long long int sd_evals = std::sqrt(evals_variance);
+
+
+        ofs << "avg_evals: " << avg_evals << " ";
+        std::cout << "avg_evals: " << avg_evals << " ";
+
+        ofs << "sd: " << sd_evals << "\n";
+        std::cout << "sd: " << sd_evals << "\n";
     }
 
 
