@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "in_depth_results_10s.txt";
+    std::string f = "in_depth_results_10sec.txt";
 
 
     if (f != "") {
