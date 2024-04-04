@@ -126,7 +126,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
                 if (j == i || j == i_next || j_next == i) continue; // catch intersections
                 int old_cost = 0;
                 int cost_improvement = 0;
-
+                int k;
 
 
                 // Current edges to change
@@ -134,7 +134,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
                 old_cost += get_cost(solution[j], solution[j_next], edge_matrix);
 
                 // All of the distances on one side, from i to j
-                int k = i_next;
+                k = i_next;
                 while (k != j) {
                     old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
                     k = (k + 1) % solution.size();
@@ -146,7 +146,7 @@ std::vector <int> steepest_solution(std::vector <int> solution, std::vector <std
                 cost_improvement -= get_cost(solution[j], solution[i], edge_matrix);
 
                 // Distances on the same side as before, but reversed
-                int k = i_next;
+                k = i_next;
                 while (k != j) {
                     cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
                     k = (k + 1) % solution.size();
@@ -249,6 +249,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
                 if (j_intra == i_intra || j_intra == i_next || j_next == i_intra) continue;
                 int old_cost = 0;
                 int cost_improvement = 0;
+                int k;
 
 
                 // Current edges to change
@@ -256,7 +257,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
                 old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
 
                 // All of the distances on one side, from i to j
-                int k = i_next;
+                k = i_next;
                 while (k != j_intra) {
                     old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
                     k = (k + 1) % solution.size();
@@ -268,7 +269,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
                 cost_improvement -= get_cost(solution[j_intra], solution[i_intra], edge_matrix);
 
                 // Distances on the same side as before, but reversed
-                int k = i_next;
+                k = i_next;
                 while (k != j_intra) {
                     cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
                     k = (k + 1) % solution.size();
