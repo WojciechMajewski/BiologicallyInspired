@@ -201,8 +201,6 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
     // 100 iterations instead of while(true)
     for (int t = 0; t < 1000; t++) {
         int best_improvement = 0;
-        int new_node_index = -1;
-        int replacing_node_index = -1;
 
         int first_edge_start_index = -1; // By definition the end node will be (i+1 mod size)
         int second_edge_start_index = -1;
@@ -229,8 +227,6 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
         while (true) {
             // New node advance
 
-            //std::cout << j_intra << "\n";
-
             if (!intra_finished) {
                 j_intra++;
                 if (j_intra + 1 >= i_intra) {
@@ -254,19 +250,48 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
                 int old_cost = 0;
                 int cost_improvement = 0;
 
+
+                // Current edges to change
                 old_cost += get_cost(solution[i_intra], solution[i_next], edge_matrix);
                 old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
 
+                // All of the distances on one side, from i to j
+                int k = i_next;
+                while (k != j_intra) {
+                    old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
+                    k = (k + 1) % solution.size();
+                }
 
+
+                // Cost of two new edges
                 cost_improvement -= get_cost(solution[j_next], solution[i_next], edge_matrix);
                 cost_improvement -= get_cost(solution[j_intra], solution[i_intra], edge_matrix);
 
+                // Distances on the same side as before, but reversed
+                int k = i_next;
+                while (k != j_intra) {
+                    cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
+                    k = (k + 1) % solution.size();
+                }
 
                 cost_improvement += old_cost;
 
 
                 if (cost_improvement > 0) {
-                    std::reverse(solution.begin() + smaller_index_edge_end, solution.begin() + bigger_index_edge_end);
+
+                    if (i_next > j_next) {
+
+                        std::reverse(solution.begin(), solution.end()); // Reverse whole
+                        i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                        j_next = solution.size() - j_next;
+
+                        std::reverse(solution.begin() + j_next, solution.begin() + i_next); // Flip using new indexes
+
+                    }
+                    else {
+                        std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+                    }
+
                     break;
                 }
 
