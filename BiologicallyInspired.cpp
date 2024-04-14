@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "in_fin.txt";
+    std::string f = "tests.txt";
 
 
     if (f != "") {
@@ -17,9 +17,9 @@ int main() {
     std::vector <std::string> files;
     //files.push_back("ATSP/br17.atsp");
     files.push_back("ATSP/ftv33.atsp");
-    files.push_back("ATSP/ftv38.atsp");
-    files.push_back("ATSP/ft53.atsp");
-    files.push_back("ATSP/ftv55.atsp");
+    //files.push_back("ATSP/ftv38.atsp");
+    //files.push_back("ATSP/ft53.atsp");
+    //files.push_back("ATSP/ftv55.atsp");
     //files.push_back("ATSP/ft70.atsp");
     //files.push_back("ATSP/kro124p.atsp");
     //files.push_back("ATSP/ry48p.atsp");
@@ -45,14 +45,19 @@ int main() {
         std::string algorithm_used;
         int time_used = 10; // seconds
 
-        //std::vector <std::string> configurations;
-        //
-        //configurations.push_back("R");
+        std::vector <std::string> configurations;
+
+        //configurations.push_back("TS");
+        configurations.push_back("SA");
+
+
+        configurations.push_back("R");
         //configurations.push_back("RW");
         //configurations.push_back("H");
-        //configurations.push_back("G");
+        configurations.push_back("G");
         //configurations.push_back("S");
-        /*
+        
+        
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
         
@@ -75,7 +80,7 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
-        */
+        
         /*
 
         /// In-depth
@@ -100,7 +105,7 @@ int main() {
         */
 
 
-        
+        /*
         /// Initial and final quality ///
         std::vector <std::string> configurations;
         configurations.push_back("G");
@@ -120,6 +125,7 @@ int main() {
             solution_search_reruns(runs, algorithm_used, edge_matrix, rng, ofs);
             
         }
+        */
         
 
         /*
