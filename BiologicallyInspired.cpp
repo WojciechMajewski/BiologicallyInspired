@@ -51,7 +51,7 @@ int main() {
         configurations.push_back("SA");
 
 
-        configurations.push_back("R");
+        //configurations.push_back("R");
         //configurations.push_back("RW");
         //configurations.push_back("H");
         configurations.push_back("G");

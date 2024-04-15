@@ -316,7 +316,11 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
     // 
     // 100 iterations instead of while(true)
 
-    int iterations = 1000;
+
+    float initial_temp = 0.1f;
+    std::uniform_real_distribution<double> distribution(0.0, 1.0);
+
+    int iterations = 10000;
 
     for (long long int t = 0; t < iterations; t++) {
         step_count++;
@@ -340,103 +344,78 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
 
         long long int i_intra_iter = 0; // This calculates when the loop should end
         long long int i_intra = (i_intra_iter + random_offset) % solution.size(); // This is used as an index in calculations, and is always offset from i_intra_iter by set random amount
-        long long int j_intra = 0;
+        long long int j_intra = rng() % solution.size(); // Was 0
         bool intra_finished = false;
 
-        float initial_temp = 0.1f;
-        std::uniform_real_distribution<double> distribution(0.0, 1.0);
-
         // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an long long internal swap
-        while (true) {
-            // New node advance
-            if (!intra_finished) {
-                j_intra++;
-                if (j_intra >= solution.size()) {
-                    j_intra = 0;
-                    i_intra_iter++;
-                    if (i_intra_iter >= solution.size()) {
-                        intra_finished = true;
-                        continue; // No edge rearrangement will improve the score
-                    }
+            
 
-                    i_intra = (i_intra_iter + random_offset) % solution.size();
+        long long int i_next = (i_intra + 1) % solution.size();
+        long long int j_next = (j_intra + 1) % solution.size();
+        long long int smaller_index_edge_end = std::min(i_next, j_next);
+        long long int bigger_index_edge_end = std::max(i_next, j_next);
 
-                }
-
-                long long int i_next = (i_intra + 1) % solution.size();
-                long long int j_next = (j_intra + 1) % solution.size();
-                long long int smaller_index_edge_end = std::min(i_next, j_next);
-                long long int bigger_index_edge_end = std::max(i_next, j_next);
-
-                if (j_intra == i_intra || j_intra == i_next || j_next == i_intra) continue;
-                long long int old_cost = 0;
-                long long int cost_improvement = 0;
-                long long int k;
+        if (j_intra == i_intra || j_intra == i_next || j_next == i_intra) continue;
+        long long int old_cost = 0;
+        long long int cost_improvement = 0;
+        long long int k;
 
 
-                // Current edges to change
-                old_cost += get_cost(solution[i_intra], solution[i_next], edge_matrix);
-                old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
+        // Current edges to change
+        old_cost += get_cost(solution[i_intra], solution[i_next], edge_matrix);
+        old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
 
-                // All of the distances on one side, from i to j
-                k = i_next;
-                while (k != j_intra) {
-                    old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
-                    k = (k + 1) % solution.size();
-                }
-
-
-                // Cost of two new edges
-                cost_improvement -= get_cost(solution[i_next], solution[j_next], edge_matrix);
-                cost_improvement -= get_cost(solution[i_intra], solution[j_intra], edge_matrix);
-
-                // Distances on the same side as before, but reversed
-                k = i_next;
-                while (k != j_intra) {
-                    cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
-                    k = (k + 1) % solution.size();
-                }
-
-                cost_improvement += old_cost;
-
-                evaluation_count++;
-
-                //float T = initial_temp / (t + 1);
-                //float acceptance_threshold = exp(float(cost_improvement) / float(t));
-
-                float acceptance_threshold = initial_temp - ((t + 1) * initial_temp / iterations);
+        // All of the distances on one side, from i to j
+        k = i_next;
+        while (k != j_intra) {
+            old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
+            k = (k + 1) % solution.size();
+        }
 
 
-                float random_float = distribution(rng);
+        // Cost of two new edges
+        cost_improvement -= get_cost(solution[i_next], solution[j_next], edge_matrix);
+        cost_improvement -= get_cost(solution[i_intra], solution[j_intra], edge_matrix);
 
-                //std::cout << cost_improvement << " | " << random_float << " " << acceptance_threshold;
-                //if (cost_improvement <= 0 && random_float < acceptance_threshold) std::cout << "EEEEEE";
-                //std::cout << "\n";
+        // Distances on the same side as before, but reversed
+        k = i_next;
+        while (k != j_intra) {
+            cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
+            k = (k + 1) % solution.size();
+        }
 
-                if (cost_improvement > 0 || random_float < acceptance_threshold) {
+        cost_improvement += old_cost;
 
-                    if (i_next > j_next) {
+        evaluation_count++;
 
-                        std::reverse(solution.begin(), solution.end()); // Reverse whole
-                        i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
-                        j_next = solution.size() - j_next;
+        //float T = initial_temp / (t + 1);
+        //float acceptance_threshold = exp(float(cost_improvement) / float(t));
 
-                        std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+        float acceptance_threshold = initial_temp - ((t + 1) * initial_temp / iterations);
 
-                    }
-                    else {
-                        std::reverse(solution.begin() + i_next, solution.begin() + j_next);
-                    }
 
-                    break;
-                }
+        float random_float = distribution(rng);
+
+        //std::cout << cost_improvement << " | " << random_float << " " << acceptance_threshold;
+        //if (cost_improvement <= 0 && random_float < acceptance_threshold) std::cout << "EEEEEE";
+        //std::cout << "\n";
+
+        if (cost_improvement > 0 || random_float < acceptance_threshold) {
+
+            if (i_next > j_next) {
+
+                std::reverse(solution.begin(), solution.end()); // Reverse whole
+                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = solution.size() - j_next;
+
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+
             }
             else {
-
-                return solution;
-                // No improvement can be found by greedy, so end
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
             }
         }
+        
 
     }
 
