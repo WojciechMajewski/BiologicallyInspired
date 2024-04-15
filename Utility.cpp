@@ -316,11 +316,13 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
     // 
     // 100 iterations instead of while(true)
 
+    std::vector <int> best_solution = solution;
+    long long int best_distance = calculate_distance(solution, edge_matrix);
 
-    float initial_temp = 0.2f;
+    float initial_temp = 0.1f;
     std::uniform_real_distribution<double> distribution(0.0, 1.0);
 
-    int iterations = 1000;
+    int iterations = 10000;
 
     for (long long int t = 0; t < iterations; t++) {
         step_count++;
@@ -386,6 +388,16 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
 
         cost_improvement += old_cost;
 
+
+        long long int current_cost = calculate_distance(solution, edge_matrix);
+        long long int new_cost = current_cost - cost_improvement;
+
+        if (best_distance > new_cost) {
+            best_distance = new_cost;
+            best_solution = solution;
+        }
+
+
         evaluation_count++;
 
         //float T = initial_temp / (t + 1);
@@ -420,7 +432,7 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
 
     }
 
-    return solution;
+    return best_solution;
 }
 
 std::vector <int> nearest_nondeterministic_solution(std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, int pool_size = 3) {
