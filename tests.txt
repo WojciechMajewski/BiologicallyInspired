@@ -1,5 +1,14 @@
 Problem ATSP/ftv33.atsp:
 SA runs for 10 seconds:
-1653
-1703
-1681
+2784
+2827
+2695
+2779
+2878
+2777
+2964
+2865
+2909
+2878
+
+G runs for 10 seconds:

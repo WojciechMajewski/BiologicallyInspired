@@ -317,10 +317,10 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
     // 100 iterations instead of while(true)
 
 
-    float initial_temp = 0.1f;
+    float initial_temp = 0.2f;
     std::uniform_real_distribution<double> distribution(0.0, 1.0);
 
-    int iterations = 10000;
+    int iterations = 1000;
 
     for (long long int t = 0; t < iterations; t++) {
         step_count++;
@@ -391,7 +391,7 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
         //float T = initial_temp / (t + 1);
         //float acceptance_threshold = exp(float(cost_improvement) / float(t));
 
-        float acceptance_threshold = initial_temp - ((t + 1) * initial_temp / iterations);
+        float acceptance_threshold = initial_temp * (1 - (t + 1) / iterations);
 
 
         float random_float = distribution(rng);
@@ -399,6 +399,7 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
         //std::cout << cost_improvement << " | " << random_float << " " << acceptance_threshold;
         //if (cost_improvement <= 0 && random_float < acceptance_threshold) std::cout << "EEEEEE";
         //std::cout << "\n";
+
 
         if (cost_improvement > 0 || random_float < acceptance_threshold) {
 
