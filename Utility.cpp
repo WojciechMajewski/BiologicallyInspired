@@ -303,7 +303,7 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
                 // No improvement can be found by greedy, so end
             }
         }
-        
+
     }
 
     return solution;
@@ -319,12 +319,25 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
     std::vector <int> best_solution = solution;
     long long int best_distance = calculate_distance(solution, edge_matrix);
 
-    float initial_temp = 0.1f;
+    float temperature = 0.95f;
+    float L = solution.size(); // Number of moves on the same temperature
+    float alpha = 0.9; // Change in temperature
+    float P = 10; // Timeout threshold for terminating the algorithm
+
+    float L_counter = 0;
+    float timeout_counter = 0;
+
     std::uniform_real_distribution<double> distribution(0.0, 1.0);
 
-    int iterations = 10000;
+    int iterations = 1000000;
 
     for (long long int t = 0; t < iterations; t++) {
+        L_counter++;
+        if (L_counter >= L){
+            L_counter = 0;
+            temperature *= alpha;
+        }
+
         step_count++;
         long long int best_improvement = 0;
 
@@ -347,7 +360,6 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
         long long int i_intra_iter = 0; // This calculates when the loop should end
         long long int i_intra = (i_intra_iter + random_offset) % solution.size(); // This is used as an index in calculations, and is always offset from i_intra_iter by set random amount
         long long int j_intra = rng() % solution.size(); // Was 0
-        bool intra_finished = false;
 
         // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an long long internal swap
             
@@ -392,28 +404,23 @@ std::vector <int> SA_solution(std::vector <int> solution, std::vector <std::vect
         long long int current_cost = calculate_distance(solution, edge_matrix);
         long long int new_cost = current_cost - cost_improvement;
 
+        evaluation_count++;
+
         if (best_distance > new_cost) {
             best_distance = new_cost;
             best_solution = solution;
+            timeout_counter = 0;
         }
-
-
-        evaluation_count++;
-
-        //float T = initial_temp / (t + 1);
-        //float acceptance_threshold = exp(float(cost_improvement) / float(t));
-
-        float acceptance_threshold = initial_temp * (1 - (t + 1) / iterations);
-
+        else {
+            timeout_counter++;
+            if (temperature < 0.01 && timeout_counter >= P * L) {
+                return best_solution;
+            }
+        }
 
         float random_float = distribution(rng);
 
-        //std::cout << cost_improvement << " | " << random_float << " " << acceptance_threshold;
-        //if (cost_improvement <= 0 && random_float < acceptance_threshold) std::cout << "EEEEEE";
-        //std::cout << "\n";
-
-
-        if (cost_improvement > 0 || random_float < acceptance_threshold) {
+        if (cost_improvement > 0 || random_float < temperature) {
 
             if (i_next > j_next) {
 
