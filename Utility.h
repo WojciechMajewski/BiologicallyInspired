@@ -25,6 +25,8 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 
 std::vector <int> nearest_nondeterministic_solution(std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, int pool_size);
 
+std::vector <int> SA_experiments(int seconds, float temperature, float L, float alpha, float P, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng);
+
 std::vector <int> solution_search(int seconds, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng);
 
 void in_depth_solution_search(int seconds, int restarts, std::string algorithm, std::vector <std::vector <int>> edge_matrix, std::default_random_engine& rng, std::ofstream& ofs);

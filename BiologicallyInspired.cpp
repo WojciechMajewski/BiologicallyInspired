@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "tests.txt";
+    std::string f = "SA_parameter_tests.txt";
 
 
     if (f != "") {
@@ -54,10 +54,41 @@ int main() {
         //configurations.push_back("R");
         //configurations.push_back("RW");
         //configurations.push_back("H");
-        configurations.push_back("G");
+        //configurations.push_back("G");
         //configurations.push_back("S");
+
+        ofs << "Problem " << filename << ":\n";
+        std::cout << "Problem " << filename << ":\n";
+
+        float temperature = 0.95f, L_coef, alpha, P;
+
+        for (L_coef = 0.5f; L_coef < 3; L_coef += 0.5f) {
+
+            for (alpha = 0.98f; alpha > 0.8f; alpha -= 0.2f) {
+
+                for (P = 5.0f; P <= 20.0f; P += 5.0f) {
+
+                    ofs << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
+                    std::cout << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
+
+                    for (int j = 0; j < 5; j++) {
+                        std::vector <int> solution = SA_experiments(time_used, temperature, dimension * L_coef, alpha, P, edge_matrix, rng);
+                        int distance = calculate_distance(solution, edge_matrix);
+
+                        ofs << distance << "\n";
+                        std::cout << distance << "\n";
+                    }
+
+                    ofs << "\n";
+                    std::cout << "\n";
+                }
+            }
+        }
+
         
-        
+        /// Standard runtype
+
+        /*
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
         
@@ -80,6 +111,7 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
+        */
         
         /*
 
