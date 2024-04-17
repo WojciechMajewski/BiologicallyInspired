@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "SA_parameter_tests.txt";
+    std::string f = "SA_parameter_tests_larger.txt";
 
 
     if (f != "") {
@@ -16,9 +16,9 @@ int main() {
 
     std::vector <std::string> files;
     //files.push_back("ATSP/br17.atsp");
-    files.push_back("ATSP/ftv33.atsp");
+    //files.push_back("ATSP/ftv33.atsp");
     //files.push_back("ATSP/ftv38.atsp");
-    //files.push_back("ATSP/ft53.atsp");
+    files.push_back("ATSP/ft53.atsp");
     //files.push_back("ATSP/ftv55.atsp");
     //files.push_back("ATSP/ft70.atsp");
     //files.push_back("ATSP/kro124p.atsp");
@@ -62,11 +62,11 @@ int main() {
 
         float temperature = 0.95f, L_coef, alpha, P;
 
-        for (L_coef = 0.5f; L_coef < 3; L_coef += 0.5f) {
+        for (L_coef = 1.5f; L_coef < 3; L_coef += 0.5f) {
 
-            for (alpha = 0.98f; alpha > 0.8f; alpha -= 0.2f) {
+            for (alpha = 0.92f; alpha > 0.8f; alpha -= 0.02f) {
 
-                for (P = 5.0f; P <= 20.0f; P += 5.0f) {
+                for (P = 15.0f; P <= 20.0f; P += 5.0f) {
 
                     ofs << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
                     std::cout << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
