@@ -310,6 +310,135 @@ std::vector <int> greedy_solution(std::vector <int> solution, std::vector <std::
 }
 
 
+std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, long long int& step_count, long long int& evaluation_count) {
+
+    std::vector <int> best_solution = solution;
+    long long int best_score = calculate_distance(best_solution, edge_matrix);
+
+    int timeout_counter = 0;
+    int timeout_time = 20; // moves without improvement to stop
+
+    std::vector <std::pair <int, int>> node_order;
+    for (int i = 0; i < edge_matrix.size(); i++) {
+        for (int j = 0; j < edge_matrix.size(); j++) {
+            if (i == j) continue;
+            node_order.push_back(std::make_pair(i, j));
+        }
+    }
+
+    std::deque <std::vector <int>> tabu_list;
+
+    int tenure = edge_matrix.size() / 4;
+
+    for (int t = 0; t < 1000; t++) {
+        std::shuffle(std::begin(node_order), std::end(node_order), rng);
+        std::priority_queue <std::vector <int>> max_priority_queue;
+
+        // Evaluate first 20 
+        for (int i = 0; i < node_order.size() * 0.2; i++) {
+            int i_intra = node_order[i].first;
+            int j_intra = node_order[i].second;
+
+            int i_next = (i_intra + 1) % solution.size();
+            int j_next = (j_intra + 1) % solution.size();
+            long long int smaller_index_edge_end = std::min(i_next, j_next);
+            long long int bigger_index_edge_end = std::max(i_next, j_next);
+
+            if (j_intra == i_intra || j_intra == i_next || j_next == i_intra) continue;
+            long long int old_cost = 0;
+            long long int cost_improvement = 0;
+            long long int k;
+
+            // Current edges to change
+            old_cost += get_cost(solution[i_intra], solution[i_next], edge_matrix);
+            old_cost += get_cost(solution[j_intra], solution[j_next], edge_matrix);
+
+            // All of the distances on one side, from i to j
+            k = i_next;
+            while (k != j_intra) {
+                old_cost += get_cost(solution[k], solution[(k + 1) % solution.size()], edge_matrix);
+                k = (k + 1) % solution.size();
+            }
+
+
+            // Cost of two new edges
+            cost_improvement -= get_cost(solution[i_next], solution[j_next], edge_matrix);
+            cost_improvement -= get_cost(solution[i_intra], solution[j_intra], edge_matrix);
+
+            // Distances on the same side as before, but reversed
+            k = i_next;
+            while (k != j_intra) {
+                cost_improvement -= get_cost(solution[(k + 1) % solution.size()], solution[k], edge_matrix);
+                k = (k + 1) % solution.size();
+            }
+
+            cost_improvement += old_cost;
+
+            std::vector <int> move;
+            move.push_back(cost_improvement);
+            move.push_back(i_intra);
+            move.push_back(j_intra);
+
+            max_priority_queue.push(move);
+        }
+
+        int top_result_count = max_priority_queue.size() * 0.2;
+
+        for (int i = 0; i < top_result_count; i++) {
+            std::vector <int> top_move = max_priority_queue.top();
+            max_priority_queue.pop();
+
+            int i_intra = top_move[1];
+            int j_intra = top_move[2];
+            int i_next = (i_intra + 1) % solution.size();
+            int j_next = (j_intra + 1) % solution.size();
+
+            std::vector <int> new_solution = solution;
+            if (i_next > j_next) {
+                std::reverse(new_solution.begin(), new_solution.end()); // Reverse whole
+                i_next = new_solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = new_solution.size() - j_next;
+
+                std::reverse(new_solution.begin() + i_next, new_solution.begin() + j_next);
+            }
+            else {
+                std::reverse(new_solution.begin() + i_next, new_solution.begin() + j_next);
+            }
+
+            // All are in Tabu list, so take the oldest
+            if (!tabu_list.empty() && i != (top_result_count - 1) && std::find(tabu_list.begin(), tabu_list.end(), new_solution) != tabu_list.end()) {
+                /* v contains x */
+                
+                continue;
+            }
+            else {
+                /* v does not contain x */
+                solution = new_solution;
+                tabu_list.push_back(solution);
+
+                if (tabu_list.size() > tenure) tabu_list.pop_front();
+
+                long long int new_dist = calculate_distance(solution, edge_matrix);
+                if (new_dist < best_score) {
+                    best_score = new_dist;
+                    best_solution = solution;
+                    timeout_counter = 0;
+                }
+                else {
+                    timeout_counter++;
+                    if (timeout_counter >= timeout_time) {
+                        return best_solution;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    return best_solution;
+}
+
+
 std::vector <int> SA_solution(std::vector <int> solution, float temperature, float L, float alpha, float P, std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, long long int& step_count, long long int& evaluation_count) {
     // if not steepest_neighborhood, then greedy
     // if not edges_exchange, then nodes exchange // But intra- and long long inter- should both be used
