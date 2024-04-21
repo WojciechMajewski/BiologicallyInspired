@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "SA_parameter_tests_larger.txt";
+    std::string f = "TS_test.txt";
 
 
     if (f != "") {
@@ -16,9 +16,9 @@ int main() {
 
     std::vector <std::string> files;
     //files.push_back("ATSP/br17.atsp");
-    //files.push_back("ATSP/ftv33.atsp");
+    files.push_back("ATSP/ftv33.atsp");
     //files.push_back("ATSP/ftv38.atsp");
-    files.push_back("ATSP/ft53.atsp");
+    //files.push_back("ATSP/ft53.atsp");
     //files.push_back("ATSP/ftv55.atsp");
     //files.push_back("ATSP/ft70.atsp");
     //files.push_back("ATSP/kro124p.atsp");
@@ -47,8 +47,8 @@ int main() {
 
         std::vector <std::string> configurations;
 
-        //configurations.push_back("TS");
-        configurations.push_back("SA");
+        configurations.push_back("TS");
+        //configurations.push_back("SA");
 
 
         //configurations.push_back("R");
@@ -56,7 +56,8 @@ int main() {
         //configurations.push_back("H");
         //configurations.push_back("G");
         //configurations.push_back("S");
-
+        
+        /*
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
 
@@ -84,11 +85,12 @@ int main() {
                 }
             }
         }
+        */
 
         
         /// Standard runtype
 
-        /*
+        
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
         
@@ -111,7 +113,7 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
-        */
+        
         
         /*
 

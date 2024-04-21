@@ -772,6 +772,24 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
         }
     }
+    else if (algorithm == "TS") {
+
+        while (elapsed_time < stopping_time) {
+
+            temp_solution = random_solution(dimension, rng);
+            temp_solution = TS_solution(temp_solution, edge_matrix, rng, step_count, evaluation_count);
+            temp_distance = calculate_distance(temp_solution, edge_matrix);
+
+            if (temp_distance < best_distance) {
+                best_distance = temp_distance;
+                best_solution = temp_solution;
+            }
+
+
+            end = std::chrono::steady_clock::now();
+            elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+        }
+        }
     else {
         std::cout << "Unknown algorithm\n";
     }

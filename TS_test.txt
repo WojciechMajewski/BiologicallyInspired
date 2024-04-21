@@ -1,0 +1,13 @@
+Problem ATSP/ftv33.atsp:
+TS runs for 10 seconds:
+1336
+1428
+1427
+1441
+1399
+1453
+1428
+1376
+1427
+1382
+
