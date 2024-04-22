@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "TS_test.txt";
+    std::string f = "TSandSA.txt";
 
 
     if (f != "") {
@@ -48,7 +48,7 @@ int main() {
         std::vector <std::string> configurations;
 
         configurations.push_back("TS");
-        //configurations.push_back("SA");
+        configurations.push_back("SA");
 
 
         //configurations.push_back("R");
@@ -57,35 +57,37 @@ int main() {
         //configurations.push_back("G");
         //configurations.push_back("S");
         
-        /*
+        
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
 
-        float temperature = 0.95f, L_coef, alpha, P;
+        float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 10;
 
-        for (L_coef = 1.5f; L_coef < 3; L_coef += 0.5f) {
+        /*
+        //for (L_coef = 1.0f; L_coef < 5; L_coef += 0.5f) {
 
-            for (alpha = 0.92f; alpha > 0.8f; alpha -= 0.02f) {
+               // for (alpha = 0.8; alpha <= 0.99; alpha += 0.04f) {
+                    //for (temperature = 0.95f; temperature >= 0.85f; temperature -= 0.02f) {
+                        //for (P = 5.0f; P <= 30.0f; P += 5.0f) {
 
-                for (P = 15.0f; P <= 20.0f; P += 5.0f) {
+                        ofs << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
+                        std::cout << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
 
-                    ofs << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
-                    std::cout << " temp: " << temperature << " | L_coef: " << L_coef << " | alpha: " << alpha << " | P: " << P << "\n";
+                        for (int j = 0; j < 5; j++) {
+                            std::vector <int> solution = SA_experiments(time_used, temperature, dimension * L_coef, alpha, P, edge_matrix, rng);
+                            int distance = calculate_distance(solution, edge_matrix);
 
-                    for (int j = 0; j < 5; j++) {
-                        std::vector <int> solution = SA_experiments(time_used, temperature, dimension * L_coef, alpha, P, edge_matrix, rng);
-                        int distance = calculate_distance(solution, edge_matrix);
+                            ofs << distance << "\n";
+                            std::cout << distance << "\n";
+                        }
 
-                        ofs << distance << "\n";
-                        std::cout << distance << "\n";
-                    }
-
-                    ofs << "\n";
-                    std::cout << "\n";
-                }
-            }
-        }
-        */
+                        ofs << "\n";
+                        std::cout << "\n";
+                    //}
+                //}
+       // }
+       */
+        
 
         
         /// Standard runtype
@@ -113,6 +115,7 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
+        
         
         
         /*

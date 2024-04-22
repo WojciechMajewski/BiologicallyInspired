@@ -1,0 +1,8 @@
+Problem ATSP/ftv33.atsp:
+ temp: 0.95 | L_coef: 1 | alpha: 0.88 | P: 10
+1489
+1616
+1587
+1539
+1596
+

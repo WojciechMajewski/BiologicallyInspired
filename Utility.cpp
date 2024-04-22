@@ -759,7 +759,10 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
         while (elapsed_time < stopping_time) {
 
             temp_solution = random_solution(dimension, rng);
-            //temp_solution = SA_solution(temp_solution, edge_matrix, rng, step_count, evaluation_count);
+
+
+            float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 10;
+            temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, step_count, evaluation_count);
             temp_distance = calculate_distance(temp_solution, edge_matrix);
 
             if (temp_distance < best_distance) {
