@@ -316,7 +316,7 @@ std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vect
     long long int best_score = calculate_distance(best_solution, edge_matrix);
 
     int timeout_counter = 0;
-    int timeout_time = 80; // moves without improvement to stop
+    int timeout_time = 100; // moves without improvement to stop
 
     std::vector <std::pair <int, int>> node_order;
     for (int i = 0; i < edge_matrix.size(); i++) {
@@ -541,7 +541,7 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
         }
         else {
             timeout_counter++;
-            if (temperature < 0.05 && timeout_counter >= P * L) {
+            if (temperature < 0.01 && timeout_counter >= P * L) {
                 return best_solution;
             }
         }
@@ -759,7 +759,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             temp_solution = random_solution(dimension, rng);
 
 
-            float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 10;
+            float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 20;
             temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             temp_distance = calculate_distance(temp_solution, edge_matrix);
 
@@ -1114,7 +1114,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
                 steps_vector.push_back(step_count);
             }
             else if(algorithm == "SA") {
-                float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 10;
+                float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 20;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             }
