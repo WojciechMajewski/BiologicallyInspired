@@ -1,0 +1,38 @@
+Problem ATSP/ftv33.atsp:
+Problem ATSP/ftv33.atsp:
+TS runs for 10 seconds:
+1338
+1341
+1398
+1324
+1356
+1302
+1399
+1428
+1367
+1377
+
+SA runs for 10 seconds:
+1572
+1551
+1634
+1531
+1562
+1594
+1567
+1538
+1591
+1529
+
+G runs for 10 seconds:
+1298
+1332
+1298
+1323
+1363
+1332
+1344
+1324
+1286
+1381
+

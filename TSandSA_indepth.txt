@@ -1,0 +1,6 @@
+Problem ATSP/ftv33.atsp:
+TS runs for 10 seconds:
+avg_evals: 2118675 sd: 17811
+1324 1626 150 2138 233506mics 81986mics 8 10 9 13 0 16 15 14 12 32 7 4 6 5 30 33 2 3 1 25 24 23 27 28 29 26 22 20 21 31 18 19 17 11 
+
+SA runs for 10 seconds:

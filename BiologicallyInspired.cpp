@@ -5,7 +5,7 @@ int main() {
 
     auto rng = std::default_random_engine{};
 
-    std::string f = "TSandSA.txt";
+    std::string f = "TSandSA_indepth.txt";
 
 
     if (f != "") {
@@ -54,16 +54,16 @@ int main() {
         //configurations.push_back("R");
         //configurations.push_back("RW");
         //configurations.push_back("H");
-        //configurations.push_back("G");
+        configurations.push_back("G");
         //configurations.push_back("S");
         
-        
+
+        /*
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
 
         float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 10;
 
-        /*
         //for (L_coef = 1.0f; L_coef < 5; L_coef += 0.5f) {
 
                // for (alpha = 0.8; alpha <= 0.99; alpha += 0.04f) {
@@ -92,7 +92,8 @@ int main() {
         
         /// Standard runtype
 
-        
+
+        /*
         ofs << "Problem " << filename << ":\n";
         std::cout << "Problem " << filename << ":\n";
         
@@ -115,10 +116,10 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
+        */
         
         
         
-        /*
 
         /// In-depth
         ofs << "Problem " << filename << ":\n";
@@ -139,7 +140,6 @@ int main() {
             ofs << "\n";
             std::cout << "\n";
         }
-        */
 
 
         /*
