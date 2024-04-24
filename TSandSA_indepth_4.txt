@@ -1,0 +1,10 @@
+Problem ATSP/br17.atsp:
+TS runs for 10 seconds:
+avg_evals: 2175316 sd: 4300
+39 39 0 39 13674mics 730mics 0 11 2 13 10 12 9 1 5 14 15 6 4 3 16 7 8 
+
+SA runs for 10 seconds:
+avg_evals: 13203823 sd: 10091
+40 45 8 139 6156mics 403mics 5 15 14 1 10 2 13 12 9 0 11 8 7 16 3 4 6 
+
+G runs for 10 seconds:

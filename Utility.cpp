@@ -527,28 +527,47 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
         }
 
         cost_improvement += old_cost;
-
-
-        long long int current_cost = calculate_distance(solution, edge_matrix);
-        long long int new_cost = current_cost - cost_improvement;
-
         evaluation_count++;
 
-        if (best_distance > new_cost) {
-            best_distance = new_cost;
-            best_solution = solution;
-            timeout_counter = 0;
+
+
+        float random_float = distribution(rng);
+
+        if (cost_improvement > 0) {
+            long long int current_cost = calculate_distance(solution, edge_matrix);
+            long long int new_cost = current_cost - cost_improvement;
+            if (best_distance > new_cost) {
+                best_distance = new_cost;
+                best_solution = solution;
+                timeout_counter = 0;
+            }
+            else {
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
+            }
+
+
+            if (i_next > j_next) {
+                std::reverse(solution.begin(), solution.end()); // Reverse whole
+                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = solution.size() - j_next;
+
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+
+            }
+            else {
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+            }
+
+            continue;
         }
-        else {
+        else if (random_float < temperature) {
             timeout_counter++;
             if (temperature < 0.01 && timeout_counter >= P * L) {
                 return best_solution;
             }
-        }
-
-        float random_float = distribution(rng);
-
-        if (cost_improvement > 0 || random_float < temperature) {
             if (i_next > j_next) {
 
                 std::reverse(solution.begin(), solution.end()); // Reverse whole
@@ -562,8 +581,12 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
                 std::reverse(solution.begin() + i_next, solution.begin() + j_next);
             }
         }
-        
-
+        else{
+            timeout_counter++;
+            if (temperature < 0.01 && timeout_counter >= P * L) {
+                return best_solution;
+            }
+        }
     }
 
     return best_solution;
