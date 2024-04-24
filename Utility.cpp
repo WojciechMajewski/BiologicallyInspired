@@ -316,7 +316,7 @@ std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vect
     long long int best_score = calculate_distance(best_solution, edge_matrix);
 
     int timeout_counter = 0;
-    int timeout_time = 100; // moves without improvement to stop
+    int timeout_time = 50; // moves without improvement to stop
 
     std::vector <std::pair <int, int>> node_order;
     for (int i = 0; i < edge_matrix.size(); i++) {
@@ -1114,7 +1114,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
                 steps_vector.push_back(step_count);
             }
             else if(algorithm == "SA") {
-                float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 20;
+                float temperature = 0.95f, L_coef = 5.0f, alpha = 0.94, P = 50;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             }
