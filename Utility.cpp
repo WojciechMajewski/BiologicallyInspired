@@ -446,8 +446,8 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
     // 
     // 100 iterations instead of while(true)
 
-    std::vector <int> best_solution = solution;
-    long long int best_distance = calculate_distance(solution, edge_matrix);
+    //std::vector <int> best_solution = solution;
+    //long long int best_distance = calculate_distance(solution, edge_matrix);
 
     
      // Number of moves on the same temperature
@@ -532,7 +532,49 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
 
 
         float random_float = distribution(rng);
+        if (cost_improvement > 0) {
+            timeout_counter = 0;
 
+
+            if (i_next > j_next) {
+                std::reverse(solution.begin(), solution.end()); // Reverse whole
+                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = solution.size() - j_next;
+
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+
+            }
+            else {
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+            }
+
+            continue;
+        }
+        else if (random_float < temperature) {
+            timeout_counter++;
+            if (temperature < 0.01 && timeout_counter >= P * L) {
+                return solution;
+            }
+            if (i_next > j_next) {
+
+                std::reverse(solution.begin(), solution.end()); // Reverse whole
+                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = solution.size() - j_next;
+
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+
+            }
+            else {
+                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+            }
+        }
+        else {
+            timeout_counter++;
+            if (temperature < 0.01 && timeout_counter >= P * L) {
+                return solution;
+            }
+        }
+        /*
         if (cost_improvement > 0) {
             long long int current_cost = calculate_distance(solution, edge_matrix);
             long long int new_cost = current_cost - cost_improvement;
@@ -587,9 +629,11 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
                 return best_solution;
             }
         }
+        */
     }
 
-    return best_solution;
+    return solution;
+    //return best_solution;
 }
 
 std::vector <int> nearest_nondeterministic_solution(std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, int pool_size = 3) {
@@ -1137,7 +1181,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
                 steps_vector.push_back(step_count);
             }
             else if(algorithm == "SA") {
-                float temperature = 0.95f, L_coef = 10.0f, alpha = 0.92, P = 50;
+                float temperature = 0.95f, L_coef = 20.0f, alpha = 0.92, P = 50;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             }
