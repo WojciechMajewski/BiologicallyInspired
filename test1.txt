@@ -1,0 +1,28 @@
+Problem ATSP/br17.atsp:
+TS runs for 10 seconds:
+avg_evals: 2088339 sd: 7525
+39 39 0 39 25810mics 1395mics 0 11 2 13 10 12 9 1 5 14 15 6 4 3 16 7 8 
+
+SA runs for 10 seconds:
+avg_evals: 16191645 sd: 27602
+39 39 0 39 28274mics 2379mics 10 9 1 13 2 11 0 8 16 7 3 4 6 15 14 5 12 
+
+G runs for 10 seconds:
+avg_steps: 16 sd: 3
+avg_evals: 20523619 sd: 58585
+39 39 0 39 239mics 47mics 5 6 14 11 0 2 13 10 12 9 1 7 8 16 3 4 15 
+
+Problem ATSP/ftv33.atsp:
+TS runs for 10 seconds:
+avg_evals: 2044780 sd: 20872
+1324 1609 143 2113 294966mics 115649mics 24 23 19 20 21 31 18 17 11 8 10 9 32 7 4 6 5 30 33 2 3 0 13 12 14 15 16 1 25 27 28 29 26 22 
+
+SA runs for 10 seconds:
+avg_evals: 9826617 sd: 39330
+1458 1846 161 2384 108563mics 8551mics 19 31 18 17 11 8 10 9 32 7 4 6 5 30 29 27 28 26 22 25 16 15 14 12 13 0 1 33 2 3 24 23 20 21 
+
+G runs for 10 seconds:
+avg_steps: 57 sd: 9
+avg_evals: 11448748 sd: 34306
+1298 1783 171 2612 5307mics 1530mics 20 21 19 31 18 17 11 8 10 9 32 7 4 6 5 30 33 2 3 0 13 12 14 15 16 1 25 24 23 27 28 29 26 22 
+
