@@ -446,8 +446,10 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
     // 
     // 100 iterations instead of while(true)
 
-    //std::vector <int> best_solution = solution;
-    //std::int64_t best_distance = calculate_distance(solution, edge_matrix);
+    std::int64_t current_distance = calculate_distance(solution, edge_matrix);
+
+    std::vector <int> best_solution = solution;
+    std::int64_t best_distance = calculate_distance(solution, edge_matrix);
 
     
      // Number of moves on the same temperature
@@ -467,23 +469,11 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
             L_counter = 0;
             temperature *= alpha;
         }
-        std::int64_t best_improvement = 0;
 
-        std::int64_t first_edge_start_index = -1; // By definition the end node will be (i+1 mod size)
-        std::int64_t second_edge_start_index = -1;
 
-        std::int64_t first_to_switch_index = -1;
-        std::int64_t second_to_switch_index = -1;
-
+        /*
         std::int64_t random_offset = rng() % solution.size(); //TODO FIX
 
-        //std::int64_t io = (i + random_offset) % solution.size(); // that's for greedy
-
-        std::int64_t i_old_node_iterating = 0;
-        std::int64_t i_old_node = (i_old_node_iterating + random_offset) % solution.size();
-        std::int64_t j_new_node = 0;
-        std::int64_t old_cost_new_node = 0;
-        bool new_node_finished = false;
 
         std::int64_t i_intra_iter = 0; // This calculates when the loop should end
         std::int64_t i_intra = (i_intra_iter + random_offset) % solution.size(); // This is used as an index in calculations, and is always offset from i_intra_iter by set random amount
@@ -528,10 +518,94 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
 
         cost_improvement += old_cost;
         evaluation_count++;
+        */
 
 
+        std::vector <int> new_solution = solution;
+
+        int changes_to_do = std::ceil(temperature / 10 * solution.size());
+        for (int h = 0; h < changes_to_do; h++) {
+
+            std::int64_t i_intra = 0;
+            std::int64_t j_intra = 0;
+            std::int64_t i_next = 0;
+            std::int64_t j_next = 0;
+
+            while (j_intra == i_intra || j_intra == i_next || j_next == i_intra) {
+                std::int64_t random_offset = rng() % new_solution.size(); //TODO FIX
+
+
+                std::int64_t i_intra_iter = 0; // This calculates when the loop should end
+                i_intra = (i_intra_iter + random_offset) % new_solution.size(); // This is used as an index in calculations, and is always offset from i_intra_iter by set random amount
+                j_intra = rng() % new_solution.size(); // Was 0
+
+                // Similar to steepest, but it needs to randomize whether it tries to add a new node or do an std::int64_ternal swap
+
+
+                i_next = (i_intra + 1) % new_solution.size();
+                j_next = (j_intra + 1) % new_solution.size();
+            }
+
+            std::int64_t smaller_index_edge_end = std::min(i_next, j_next);
+            std::int64_t bigger_index_edge_end = std::max(i_next, j_next);
+
+
+            if (i_next > j_next) {
+                std::reverse(new_solution.begin(), new_solution.end()); // Reverse whole
+                i_next = new_solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                j_next = new_solution.size() - j_next;
+
+                std::reverse(new_solution.begin() + i_next, new_solution.begin() + j_next);
+
+            }
+            else {
+                std::reverse(new_solution.begin() + i_next, new_solution.begin() + j_next);
+            }
+        }
+        std::int64_t new_distance = calculate_distance(new_solution, edge_matrix);
+        std::int64_t cost_improvement = current_distance - new_distance;
 
         float random_float = distribution(rng);
+
+        if (cost_improvement > 0) {
+            if (best_distance > new_distance) {
+                best_distance = new_distance;
+                best_solution = new_solution;
+                timeout_counter = 0;
+            }
+            else {
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
+            }
+
+            solution = new_solution;
+            current_distance = new_distance;
+
+            continue;
+        }
+        else {
+
+            //std::cout << cost_improvement << " " << temperature << " " << float(cost_improvement) / 100 / temperature << "\n";
+            //std::cout << std::exp((float(cost_improvement) / 100) / temperature) << "\n";
+            if (random_float < std::exp(float(cost_improvement) / 10 / temperature)) {
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
+                solution = new_solution;
+                current_distance = new_distance;
+            }
+            else {
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
+            }
+        }
+
+        /*
         if (cost_improvement > 0) {
             timeout_counter = 0;
 
@@ -574,7 +648,8 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
                 return solution;
             }
         }
-        /*
+
+        
         if (cost_improvement > 0) {
             std::int64_t current_cost = calculate_distance(solution, edge_matrix);
             std::int64_t new_cost = current_cost - cost_improvement;
@@ -605,35 +680,40 @@ std::vector <int> SA_solution(std::vector <int> solution, float temperature, flo
 
             continue;
         }
-        else if (random_float < temperature) {
-            timeout_counter++;
-            if (temperature < 0.01 && timeout_counter >= P * L) {
-                return best_solution;
-            }
-            if (i_next > j_next) {
+        else {
 
-                std::reverse(solution.begin(), solution.end()); // Reverse whole
-                i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
-                j_next = solution.size() - j_next;
+            //std::cout << cost_improvement << " " << temperature << " " << float(cost_improvement) / 100 / temperature << "\n";
+            //std::cout << std::exp((float(cost_improvement) / 100) / temperature) << "\n";
+            if (random_float < std::exp(float(cost_improvement) / temperature)) {
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
+                if (i_next > j_next) {
 
-                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+                    std::reverse(solution.begin(), solution.end()); // Reverse whole
+                    i_next = solution.size() - i_next; // Flip indexes (edge starts now become edge ends)
+                    j_next = solution.size() - j_next;
 
+                    std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+
+                }
+                else {
+                    std::reverse(solution.begin() + i_next, solution.begin() + j_next);
+                }
             }
             else {
-                std::reverse(solution.begin() + i_next, solution.begin() + j_next);
-            }
-        }
-        else{
-            timeout_counter++;
-            if (temperature < 0.01 && timeout_counter >= P * L) {
-                return best_solution;
+                timeout_counter++;
+                if (temperature < 0.01 && timeout_counter >= P * L) {
+                    return best_solution;
+                }
             }
         }
         */
     }
 
-    return solution;
-    //return best_solution;
+    //return solution;
+    return best_solution;
 }
 
 std::vector <int> nearest_nondeterministic_solution(std::vector <std::vector <int>>& edge_matrix, std::default_random_engine& rng, int pool_size = 3) {
@@ -1181,7 +1261,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
                 steps_vector.push_back(step_count);
             }
             else if(algorithm == "SA") {
-                float temperature = 0.95f, L_coef = 20.0f, alpha = 0.92, P = 50;
+                float temperature = 0.95f, L_coef = 20.0f, alpha = 0.9, P = 50;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             }

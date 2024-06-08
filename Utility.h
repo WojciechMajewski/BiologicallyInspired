@@ -11,6 +11,7 @@
 #include <chrono>
 #include <queue>
 #include <algorithm>
+#include <cmath>
 
 std::vector <std::vector <int>> read_file(std::string path);
 
