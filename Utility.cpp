@@ -328,9 +328,9 @@ std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vect
 
     std::deque <std::vector <int>> tabu_list;
 
-    int tenure = edge_matrix.size() / 4;
+    int tenure = edge_matrix.size() / 8;
 
-    for (int t = 0; t < 1000; t++) {
+    for (int t = 0; t < 100000; t++) {
         std::shuffle(std::begin(node_order), std::end(node_order), rng);
         std::priority_queue <std::vector <int>> max_priority_queue;
 
@@ -906,7 +906,7 @@ std::vector <int> solution_search(int seconds, std::string algorithm, std::vecto
             temp_solution = random_solution(dimension, rng);
 
 
-            float temperature = 0.95f, L_coef = 1.0f, alpha = 0.88, P = 20;
+            float temperature = 0.95f, L_coef = 20.0f, alpha = 0.94, P = 10;
             temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             temp_distance = calculate_distance(temp_solution, edge_matrix);
 
@@ -1261,7 +1261,7 @@ void in_depth_solution_search(int seconds, int restarts, std::string algorithm, 
                 steps_vector.push_back(step_count);
             }
             else if(algorithm == "SA") {
-                float temperature = 0.95f, L_coef = 20.0f, alpha = 0.9, P = 50;
+                float temperature = 0.95f, L_coef = 20.0f, alpha = 0.94, P = 10;
                 temp_solution = random_solution(dimension, rng);
                 temp_solution = SA_solution(temp_solution, temperature, dimension * L_coef, alpha, P, edge_matrix, rng, evaluation_count);
             }
