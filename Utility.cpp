@@ -316,7 +316,7 @@ std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vect
     std::int64_t best_score = calculate_distance(best_solution, edge_matrix);
 
     int timeout_counter = 0;
-    int timeout_time = 100; // moves without improvement to stop
+    int timeout_time = edge_matrix.size() * 4; // moves without improvement to stop
 
     std::vector <std::pair <int, int>> node_order;
     for (int i = 0; i < edge_matrix.size(); i++) {
@@ -328,9 +328,9 @@ std::vector <int> TS_solution(std::vector <int> solution, std::vector <std::vect
 
     std::deque <std::vector <int>> tabu_list;
 
-    int tenure = edge_matrix.size() / 8;
+    int tenure = edge_matrix.size() / 4;
 
-    for (int t = 0; t < 100000; t++) {
+    for (int t = 0; t < 1000000; t++) {
         std::shuffle(std::begin(node_order), std::end(node_order), rng);
         std::priority_queue <std::vector <int>> max_priority_queue;
 

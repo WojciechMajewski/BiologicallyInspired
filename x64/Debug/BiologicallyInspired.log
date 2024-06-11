@@ -1,6 +1,4 @@
-﻿  RunConfigurations.cpp
-C:\Users\wojci\source\repos\BiologicallyInspired\RunConfigurations.cpp(43,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Utility.cpp
+﻿  Utility.cpp
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(70,32): warning C4018: '<': signed/unsigned mismatch
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(80,28): warning C4244: 'argument': conversion from 'int64_t' to '_Ty', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(80,28): warning C4244:         with
@@ -14,6 +12,7 @@ C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(95,19): warning C42
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(95,19): warning C4244:         ]
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(232,29): warning C4018: '>=': signed/unsigned mismatch
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(235,38): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(319,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(331,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(379,28): warning C4244: 'argument': conversion from 'int64_t' to '_Ty', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(379,28): warning C4244:         with
@@ -71,5 +70,4 @@ C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(1347,36): warning C
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(1350,36): warning C4018: '<': signed/unsigned mismatch
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(1352,31): warning C4244: 'initializing': conversion from 'double' to 'int64_t', possible loss of data
 C:\Users\wojci\source\repos\BiologicallyInspired\Utility.cpp(1375,32): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
   BiologicallyInspired.vcxproj -> C:\Users\wojci\source\repos\BiologicallyInspired\x64\Debug\BiologicallyInspired.exe
